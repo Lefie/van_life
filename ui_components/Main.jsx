@@ -37,5 +37,7 @@ export default function Main({cur}) {
             </>
         )
     }
+
+   
    
 }

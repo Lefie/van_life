@@ -36,7 +36,7 @@
 
 
 .main-content {
-  height: 75vh;
+  min-height: 75vh;
 }
 
 .home-content {
@@ -92,13 +92,14 @@
   align-items: left;
   justify-content: space-evenly;
   width:80%;
-  height:16vh;
+  min-height:16vh;
   margin-top:2em;
 }
 
 .explore {
-  margin-top:5vh;
-  height:20vh ;
+  margin-top:3vh;
+  margin-bottom: 1.5vh;
+  min-height:20vh ;
   width:50%;
   background-color: #FFCC8D;
   border-radius: 5px;
@@ -106,7 +107,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-left:5vh;
+  padding: 2vh 5vh;
 }
 
 .explore > button {
@@ -127,5 +128,99 @@
   height: 10vh;
   color:#AAAAAA;
   font-size:1rem;
+}
+
+.van_img {
+  width: 150px;
+  border-radius: 5px;
+}
+
+.vans-main-container {
+  min-height: 75vh;
+  background-color: #FFF7ED;
+}
+
+.vans-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.vans-main-container-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap:1rem;
+  padding-left:5rem;
+  margin-bottom: 1rem;
+}
+
+.vans-main-container-filter {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 1rem;
+  row-gap: 1rem;
+}
+
+.vans-main-container-filter > button {
+  border:none;
+  border-radius: 5px;
+  background-color: #FFEAD0;
+  padding:1vh 2.2vh;
+  color: #4D4D4D;
+}
+
+.vans-main-container-filter > span {
+  color: #4D4D4D;
+  font-size:0.9rem;
+  margin-left:0.5em;
+  align-self: center;
+  text-decoration: underline;
+}
+
+.van-desc {
+  font-weight: bold;
+  display: flex;
+  font-size:0.8rem;
+  justify-content: space-between;
+}
+
+.van-price > span {
+  font-weight: normal;
+  display: block;
+}
+
+.van-price {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  cursor:pointer;
+  border:none;
+  border-radius: 5px;
+  padding:0.3rem 0.7rem;
+}
+
+.simple-btn {
+  background-color: #E17654 ;
+  color: #FFEAD0 ;
+}
+
+.luxury-btn {
+  background-color: #161616 ;
+  color: #FFEAD0 ;
+}
+
+.rugged-btn {
+  background-color: #115E59 ;
+  color: #FFEAD0;  
 }
 

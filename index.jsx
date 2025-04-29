@@ -4,6 +4,11 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Vans from './pages/Vans'
 import About from './pages/About'
 import Home from './pages/Home'
+import { makeServer } from './mock_server'
+
+if (process.env.NODE_ENV === "development") {
+  makeServer(); 
+}
 
 function App() {
   return (

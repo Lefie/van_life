@@ -8,7 +8,7 @@ export default function Nav({cur}) {
     return (
         <>
         <div className="nav-bar">
-            <img className="logo-img" src={logo} />
+            <Link to="/"><img className="logo-img" src={logo} /> </Link>
             <div className={`menu_list`}>
                 <Link to="/about"><p className={`${cur==="about"?"underline":""}`}>About</p></Link>
                 <Link to="/vans"><p className={`${cur==="vans"?"underline":""}`}>Vans</p></Link>
