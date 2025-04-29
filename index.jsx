@@ -1,11 +1,9 @@
 
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import Nav from './ui_components/Nav'
-import Main from './ui_components/Main'
-import Footer from './ui_components/Footer'
-import Vans from './ui_components/Vans'
-import About from './ui_components/About'
+import Vans from './pages/Vans'
+import About from './pages/About'
+import Home from './pages/Home'
 
 function App() {
   return (
@@ -19,15 +17,7 @@ function App() {
   )
 }
 
-function Home() {
-  return (
-    <>   
-     <Nav />
-     <Main />
-     <Footer />
-    </>
-  )
-}
+
 
 
 createRoot(document.getElementById('root')).render(
