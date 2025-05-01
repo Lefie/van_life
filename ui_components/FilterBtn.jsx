@@ -12,7 +12,7 @@ export default function FilterBtn({name}){
     }
 
     return (<>
-     <button className={`btn ${btn_style}`}>{name}</button>
+     <button className={`btn ${btn_style} filter-btn`}>{name}</button>
     </>)
 
 }

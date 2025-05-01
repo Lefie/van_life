@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Nav from "../ui_components/Nav";
 import FilterBtn from "../ui_components/FilterBtn";
 import Footer from "../ui_components/Footer";
@@ -21,12 +22,14 @@ export default function Vans() {
 
     const displayVan = vans.map(van => (
         <div className={"van"}>
-            <img className="van_img" src={van.imageUrl} alt={`van ${van.id}`} />
-            <div className="van-desc">
-                <p className="van-name">{van.name}</p>
-                <p className="van-price">${van.price} <span>/day</span></p>
-            </div>
-            <FilterBtn name={van.type}  />
+            <Link to={`/vans/${van.id}`}>
+                <img className="van_img" src={van.imageUrl} alt={`van ${van.id}`} />
+                <div className="van-desc">
+                    <p className="van-name">{van.name}</p>
+                    <p className="van-price">${van.price} <span>/day</span></p>
+                </div>
+                <FilterBtn name={van.type}  />
+            </Link>
         </div>
     ))
     
