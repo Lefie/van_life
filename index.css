@@ -284,3 +284,17 @@
   align-self: self-start;
 }
 
+/*  host pages */
+.host-links {
+  height: 8vh;
+  background-color: #FFF7ED;
+  display: flex;
+  padding-left:2.5em;
+  column-gap: 2.5em;
+}
+
+.host-links a {
+  color:#4D4D4D;
+  text-decoration: none;
+}
+
