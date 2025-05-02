@@ -6,7 +6,12 @@ import VanDetails from './pages/VanDetails'
 import About from './pages/About'
 import Home from './pages/Home'
 import BaseLayout from './pages/BaseLayout'
+import HostLayout from './pages/Host/HostLayout'
 import { makeServer } from './mock_server'
+import Dashboard from "./pages/Host/Dashboard"
+import Income from './pages/Host/Income'
+import VansHost from './pages/Host/VansHost'
+import Reviews from "./pages/Host/Reviews"
 
 if (process.env.NODE_ENV === "development") {
   makeServer(); 
@@ -18,9 +23,20 @@ function App() {
     <Routes>  
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/vans" element={<Vans />} />
-          <Route path="/vans/:id" element={<VanDetails />} />
+          <Route path="about" element={<About />} />
+          <Route path="vans" element={<Vans />} />
+          <Route path="vans/:id" element={<VanDetails />} />
+
+          <Route path="host" element={<HostLayout />}>
+              <Route index element={<Dashboard/>} />
+              <Route path="income" element={<Income />}/>
+              <Route path="vans" element={<VansHost />} />
+              <Route path="reviews" element={<Reviews/>} />
+          </Route>
+          
+            
+
+          
         </Route>
     </Routes>
   </BrowserRouter>
