@@ -11,6 +11,7 @@ import { makeServer } from './mock_server'
 import Dashboard from "./pages/Host/Dashboard"
 import Income from './pages/Host/Income'
 import VansHost from './pages/Host/VansHost'
+import VansDetailsHost from './pages/Host/VansDetailsHost'
 import Reviews from "./pages/Host/Reviews"
 
 if (process.env.NODE_ENV === "development") {
@@ -31,12 +32,10 @@ function App() {
               <Route index element={<Dashboard/>} />
               <Route path="income" element={<Income />}/>
               <Route path="vans" element={<VansHost />} />
+              <Route path="vans/:id" element={<VansDetailsHost />}  />
               <Route path="reviews" element={<Reviews/>} />
           </Route>
-          
-            
 
-          
         </Route>
     </Routes>
   </BrowserRouter>

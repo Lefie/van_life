@@ -298,3 +298,39 @@
   text-decoration: none;
 }
 
+.van-host-container {
+  background-color: #FFF7ED;
+  min-height:68vh;
+  padding-left:2em;
+}
+
+.vans-by-host {
+  margin:0 auto;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  row-gap:10px;
+  max-height: 50vh;
+  overflow: scroll;
+}
+
+.single-van {
+  background-color: #FFFFFF;
+  display: flex;
+  max-height:100px;
+  border-radius:5px;
+  align-items: center;
+  color: #4D4D4D;
+}
+
+.single-van img {
+  width:100px;
+  padding:10px;
+  border-radius: 20%;
+}
+
+.single-van-desc > .van-name {
+  font-weight: bold;
+  color:black;
+}
+
