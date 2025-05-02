@@ -1,9 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Nav from "../ui_components/Nav";
 import FilterBtn from "../ui_components/FilterBtn";
-import Footer from "../ui_components/Footer";
+
 
 export default function Vans() {
     const url = `/api/vans`
@@ -35,7 +34,6 @@ export default function Vans() {
     
     return (
         <>
-            <Nav cur="vans" />
             <div className="vans-main-container">
                 <div className="vans-main-container-header">
                     <h1> Explore our van options </h1>
@@ -52,7 +50,6 @@ export default function Vans() {
                     {displayVan}
                 </div>
             </div>
-            <Footer />
            
         </>
     )

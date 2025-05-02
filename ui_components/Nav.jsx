@@ -3,15 +3,15 @@ import logo from "../assets/logo.png"
 import { Link } from "react-router-dom";
 
 
-export default function Nav({cur}) {
+export default function Nav() {
 
     return (
         <>
         <div className="nav-bar">
             <Link to="/"><img className="logo-img" src={logo} /> </Link>
             <div className={`menu_list`}>
-                <Link to="/about"><p className={`${cur==="about"?"underline":""}`}>About</p></Link>
-                <Link to="/vans"><p className={`${cur==="vans"?"underline":""}`}>Vans</p></Link>
+                <Link to="/about">About</Link>
+                <Link to="/vans">Vans</Link>
             </div>
         </div>
         </>

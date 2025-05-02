@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Nav from "../ui_components/Nav";
-import Footer from "../ui_components/Footer";
 import FilterBtn from "../ui_components/FilterBtn";
 
 export default function VanDetails(){
@@ -25,10 +23,7 @@ export default function VanDetails(){
 
     return(
         <>
-        <Nav cur="vans" />
         <div className="vans-details-container">
-           
-
             {vanDetails ? 
             (
                 <>
@@ -48,10 +43,7 @@ export default function VanDetails(){
             
             ):
             <h1> Loading ... </h1>}
-            
-
         </div>
-        <Footer />
         </>
     )
 }
