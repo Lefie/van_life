@@ -13,6 +13,9 @@ import Income from './pages/Host/Income'
 import VansHost from './pages/Host/VansHost'
 import VansDetailsHost from './pages/Host/VansDetailsHost'
 import Reviews from "./pages/Host/Reviews"
+import Details from "./pages/Host/VansHost/Details"
+import Pricing from "./pages/Host/VansHost/Pricing"
+import Photos from "./pages/Host/VansHost/Photos"
 
 if (process.env.NODE_ENV === "development") {
   makeServer(); 
@@ -32,7 +35,13 @@ function App() {
               <Route index element={<Dashboard/>} />
               <Route path="income" element={<Income />}/>
               <Route path="vans" element={<VansHost />} />
-              <Route path="vans/:id" element={<VansDetailsHost />}  />
+
+              <Route path="vans/:id" element={<VansDetailsHost />}>
+                <Route index element={<Details />} />
+                <Route path="pricing" element={<Pricing />} />
+                <Route path="photos" element={<Photos />} />
+              </Route>
+              
               <Route path="reviews" element={<Reviews/>} />
           </Route>
 

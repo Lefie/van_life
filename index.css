@@ -329,8 +329,31 @@
   border-radius: 20%;
 }
 
-.single-van-desc > .van-name {
+.van-name {
   font-weight: bold;
   color:black;
 }
+
+.vans-by-host > .van-link {
+  text-decoration: none;
+}
+
+.back-link {
+  text-decoration: underline;
+  color:#4D4D4D;
+}
+
+.van-host-details-links a {
+  text-decoration: none;
+  color:inherit;
+  font-weight:bold;
+}
+
+.van-host-details-links {
+  margin-top:2em;
+  display: flex;
+  column-gap: 2em;
+}
+
+
 

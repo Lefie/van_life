@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function VansHost() {
     const url = `/api/host/vans`
@@ -14,6 +15,7 @@ export default function VansHost() {
         })
     },[])
 
+
     return (
         <>
         <div className="van-host-container">
@@ -21,13 +23,15 @@ export default function VansHost() {
             <div className="vans-by-host">
                 { vans && vans.map((van)=>(
                     <>
-                    <div className="single-van">
-                        <img  src={van.imageUrl} />
-                        <div className="single-van-desc">
-                             <p className="van-name">{van.name}</p> 
-                             <p>${van.price} / Day</p>
+                    <NavLink className="van-link"  to={`/host/vans/${van.id}`}>
+                        <div className="single-van">
+                            <img src={van.imageUrl} />
+                            <div className="single-van-desc">
+                                <p className="van-name">{van.name}</p> 
+                                <p>${van.price} / Day</p>
+                            </div>
                         </div>
-                    </div>
+                    </NavLink>
                     </>
                 ))
                 }
