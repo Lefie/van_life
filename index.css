@@ -300,12 +300,13 @@
 
 .van-host-container {
   background-color: #FFF7ED;
-  min-height:68vh;
+  min-height:70vh;
   padding-left:2em;
 }
 
 .vans-by-host {
   margin:0 auto;
+  margin-top:2em;
   max-width: 50%;
   display: flex;
   flex-direction: column;
@@ -332,6 +333,7 @@
 .van-name {
   font-weight: bold;
   color:black;
+  font-size:1.8rem;
 }
 
 .vans-by-host > .van-link {
@@ -345,14 +347,54 @@
 
 .van-host-details-links a {
   text-decoration: none;
-  color:inherit;
-  font-weight:bold;
+  color:#4D4D4D;
+  
 }
 
 .van-host-details-links {
   margin-top:2em;
+  border:1px solid green;
   display: flex;
   column-gap: 2em;
+  margin-left:2em;
+}
+
+.van-details-by-host{
+  margin:0 auto;
+  margin-top:2em;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  row-gap:10px;
+  border:1px solid green;
+  margin-left:2em;
+  align-items: center;
+}
+
+.van-details-by-host > img {
+  width:150px;
+}
+
+.van-host-details-container {
+  margin: 0 auto;
+  background-color: white;
+  margin-top:1em;
+  border:1px solid red;
+  max-width: 50%;
+  height:60vh;
+  overflow: scroll;
+}
+
+.van-profile {
+  display: flex;
+  flex-direction: column;
+  margin-left:2em;
+  height: 14vh;
+  justify-content: space-between;
+}
+
+.van-host-details-content {
+  margin-left:2em;
 }
 
 

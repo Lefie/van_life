@@ -28,7 +28,7 @@ export default function VanDetails(){
             (
                 <>
                 <div className="van-details">
-                    <Link className="back" to="/vans"><p> Back to all vans</p></Link>
+                    <Link className="back" to=".." relative="path"><p> Back to all vans</p></Link>
                     <img className="van-img-details" src={vanDetails.imageUrl} />
                     <div className="van-details-content">
                         <FilterBtn  name={`${vanDetails.type}`} />

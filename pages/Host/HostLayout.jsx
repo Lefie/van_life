@@ -12,10 +12,10 @@ export default function HostLayout() {
     return (
         <>
         <div className="host-links">
-            <NavLink end style={({isActive}) => isActive ? styles : null} to="/host" >Dashboard</NavLink>
-            <NavLink style={({isActive}) => isActive ? styles : null} to="/host/income">Income</NavLink>
-            <NavLink style={({isActive}) => isActive ? styles : null} to="/host/vans">Vans</NavLink>
-            <NavLink style={({isActive}) => isActive ? styles : null} to="/host/reviews">Reviews</NavLink>
+            <NavLink end style={({isActive}) => isActive ? styles : null} to="." >Dashboard</NavLink>
+            <NavLink style={({isActive}) => isActive ? styles : null} to="income">Income</NavLink>
+            <NavLink style={({isActive}) => isActive ? styles : null} to="vans">Vans</NavLink>
+            <NavLink style={({isActive}) => isActive ? styles : null} to="reviews">Reviews</NavLink>
         </div>
         <Outlet />
         </>
