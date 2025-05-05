@@ -395,7 +395,7 @@
 
 .van-host-details-content {
   margin-left:2em;
-  min-height: 30vh;
+  min-height: 15vh;
   padding-right:1em;
   display: flex;
   flex-direction: column;
@@ -411,5 +411,17 @@
   font-weight: normal;
 }
 
+.van-host-details-content > .pricing {
+  margin-top:50px;
+  font-size:1.5rem;
+}
 
+.van-host-details-content > .pricing span {
+  font-weight: 200;
+}
+
+.van-host-details-content > img {
+  width:100px;
+  margin-top:1em;
+}
 

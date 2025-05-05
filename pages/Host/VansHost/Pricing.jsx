@@ -6,7 +6,9 @@ export default function Pricing() {
     
     return (
         <>
-        <h1> pricing section </h1>
+         <div className="van-host-details-content">
+            <p className="pricing">${van.price} <span> / Day </span></p>
+         </div>
         </>
     )
 }

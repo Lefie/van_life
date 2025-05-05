@@ -6,7 +6,9 @@ export default function Photos() {
     
     return (
         <>
-        <h1> photo section </h1>
+         <div className="van-host-details-content">
+            <img src={`${van.imageUrl}`} />        
+            </div>
         </>
     )
 }
