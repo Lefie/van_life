@@ -353,10 +353,10 @@
 
 .van-host-details-links {
   margin-top:2em;
-  border:1px solid green;
   display: flex;
   column-gap: 2em;
   margin-left:2em;
+  margin-bottom:0.5em;
 }
 
 .van-details-by-host{
@@ -366,23 +366,23 @@
   display: flex;
   flex-direction: row;
   row-gap:10px;
-  border:1px solid green;
   margin-left:2em;
   align-items: center;
 }
 
 .van-details-by-host > img {
-  width:150px;
+  width:120px;
 }
 
 .van-host-details-container {
   margin: 0 auto;
-  background-color: white;
-  margin-top:1em;
-  border:1px solid red;
+  background-color: rgb(255, 255, 255);
+  margin-top:0.5em;
+  padding-bottom: 1em;
   max-width: 50%;
-  height:60vh;
-  overflow: scroll;
+  height:63vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .van-profile {
@@ -395,6 +395,20 @@
 
 .van-host-details-content {
   margin-left:2em;
+  min-height: 30vh;
+  padding-right:1em;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+}
+
+.van-host-details-content > .details {
+  font-weight: bold;
+  margin-top:1em;
+}
+
+.van-host-details-content > .details span {
+  font-weight: normal;
 }
 
 

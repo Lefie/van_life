@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NavLink,Link, Outlet } from "react-router-dom";
 import FilterBtn from "../../ui_components/FilterBtn";
@@ -47,7 +47,7 @@ export default function VansDetailsHost() {
                         <NavLink style={({isActive})=> isActive ? styles : null} to={`pricing`}>Pricing</NavLink>
                         <NavLink style={({isActive})=> isActive ? styles : null} to={`photos`}> Photos</NavLink>
                     </div>
-                    <Outlet />
+                    <Outlet context={van} />
                 </div>
                 </>
               )}

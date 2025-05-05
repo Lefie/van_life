@@ -19,7 +19,7 @@ export default function VanDetails(){
         console.log("van details",vanDetails)
     }
 
-
+  
 
     return(
         <>
