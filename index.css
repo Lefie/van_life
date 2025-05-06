@@ -174,15 +174,11 @@
   row-gap: 1rem;
 }
 
-.vans-main-container-filter > button {
-  border:none;
-  border-radius: 5px;
-  background-color: #FFEAD0;
-  padding:1vh 2.2vh;
-  color: #4D4D4D;
-}
 
-.vans-main-container-filter > span {
+.clear-filter {
+  cursor:pointer;
+  background-color: #FFF7ED;
+  border:none;
   color: #4D4D4D;
   font-size:0.9rem;
   margin-left:0.5em;
@@ -197,6 +193,11 @@
   justify-content: space-between;
 }
 
+.van-desc > .van-name {
+  font-size:1rem;
+  margin-right:1rem;
+}
+
 .van-price > span {
   font-weight: normal;
   display: block;
@@ -209,24 +210,30 @@
 
 .btn {
   cursor:pointer;
+  padding:0.3rem 0.7rem;
   border:none;
   border-radius: 5px;
-  padding:0.3rem 0.7rem;
+  background-color: #FFEAD0;
+  color: #4D4D4D;
 }
 
-.simple-btn {
+
+.simple-btn,.btn1:hover {
   background-color: #E17654 ;
   color: #FFEAD0 ;
+  transition:0.3s;
 }
 
-.luxury-btn {
+.luxury-btn, .btn2:hover {
   background-color: #161616 ;
   color: #FFEAD0 ;
+  transition:0.3s;
 }
 
-.rugged-btn {
+.rugged-btn,.btn3:hover {
   background-color: #115E59 ;
   color: #FFEAD0;  
+  transition:0.3s;
 }
 
 /* vans details */

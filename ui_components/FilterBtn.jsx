@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function FilterBtn({name}){
-
+    
     let btn_style;
     if(name === "simple") {
         btn_style = "simple-btn"
@@ -12,7 +12,7 @@ export default function FilterBtn({name}){
     }
 
     return (<>
-     <button className={`btn ${btn_style} filter-btn`}>{name}</button>
+     <button  className={`btn ${btn_style} filter-btn `}>{name}</button>
     </>)
 
 }

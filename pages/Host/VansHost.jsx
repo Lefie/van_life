@@ -23,7 +23,7 @@ export default function VansHost() {
             <div className="vans-by-host">
                 { vans && vans.map((van)=>(
                     <>
-                    <NavLink className="van-link"  to={`/host/vans/${van.id}`}>
+                    <NavLink className="van-link"  to={`${van.id}`}>
                         <div className="single-van">
                             <img src={van.imageUrl} />
                             <div className="single-van-desc">
