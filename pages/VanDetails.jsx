@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import FilterBtn from "../ui_components/FilterBtn";
@@ -8,6 +8,32 @@ export default function VanDetails(){
     const param = useParams()
     const van_id = param.id
     const [vanDetails, setVanDetails] = useState()
+    const location = useLocation()
+
+
+    function generateName() {
+        if(location.state){
+            
+            if(location.state.search){
+                console.log(location.state.search.slice(5))
+                return location.state.search.slice(5)
+            }else {
+                console.log("all")
+                return "all"
+            }
+        }
+    }
+
+    function generateBackLink(){
+        if ( location.state ) {
+            if(location.state.search){
+                
+                return `?${location.state.search}`
+            }else{
+                return ""
+            }
+        }
+    }
 
     useEffect(()=>{
         fetch(`/api/vans/${van_id}`)
@@ -19,6 +45,7 @@ export default function VanDetails(){
         console.log("van details",vanDetails)
     }
 
+
   
 
     return(
@@ -28,7 +55,7 @@ export default function VanDetails(){
             (
                 <>
                 <div className="van-details">
-                    <Link className="back" to=".." relative="path"><p> Back to all vans</p></Link>
+                    <Link className="back" to={`..${generateBackLink()}`} relative="path"><p> Back to {generateName()}  vans</p></Link>
                     <img className="van-img-details" src={vanDetails.imageUrl} />
                     <div className="van-details-content">
                         <FilterBtn  name={`${vanDetails.type}`} />
@@ -38,7 +65,6 @@ export default function VanDetails(){
                         <button className="main-button"> Rent this Van</button>
                     </div>
                 </div>
-               
                 </>
             
             ):

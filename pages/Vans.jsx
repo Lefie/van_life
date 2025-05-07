@@ -11,7 +11,12 @@ export default function Vans() {
     const [selected, setSelected] = useState()
     const [searchParams, setSearchParams] = useSearchParams()
     const filterType = searchParams.get("type")
-    console.log("filter type", filterType)
+    console.log("search params", searchParams)
+    if (searchParams) {
+       console.log( searchParams.getAll("type"))
+        
+    }
+    
     useEffect(()=>{
         console.log("use effect")
         fetch("/api/vans")
@@ -26,7 +31,11 @@ export default function Vans() {
 
     const displayVan = filtered_vans.map(van => (
         <div className={"van"}>
-            <NavLink to={`${van.id}`}>
+            <NavLink 
+                to={`${van.id}`} 
+                state={{
+                    search:searchParams.toString()
+                    }}>
                 <img className="van_img" src={van.imageUrl} alt={`van ${van.id}`} />
                 <div className="van-desc">
                     <p className="van-name">{van.name}</p>
