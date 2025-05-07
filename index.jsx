@@ -16,6 +16,7 @@ import Reviews from "./pages/Host/Reviews"
 import Details from "./pages/Host/VansHost/Details"
 import Pricing from "./pages/Host/VansHost/Pricing"
 import Photos from "./pages/Host/VansHost/Photos"
+import NotFound from './pages/NotFound'
 
 if (process.env.NODE_ENV === "development") {
   makeServer(); 
@@ -44,7 +45,7 @@ function App() {
               
               <Route path="reviews" element={<Reviews/>} />
           </Route>
-
+          <Route path="*" element={<NotFound />} />
         </Route>
     </Routes>
   </BrowserRouter>

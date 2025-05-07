@@ -432,3 +432,40 @@
   margin-top:1em;
 }
 
+/* not found */
+.not-found-container {
+  background-color: #FFF7ED;
+  min-height:75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+}
+
+.not-found-container h1{
+  font-size:4.8rem;
+  margin-left:5rem;
+  margin-bottom: 3rem;
+  margin-right:4rem;
+}
+
+.redirect-home {
+  display: block;
+  margin:0 auto;
+  border:none;
+  width:50%;
+  padding:1.3rem 2rem;
+  color:white;
+  background-color: black;
+  border-radius:10px;
+  font-size:1.4rem;
+  font-weight:bold;
+  cursor: pointer;
+}
+
+.not-found-link {
+  text-decoration: none;
+}
+
+
+
