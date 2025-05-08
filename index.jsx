@@ -17,6 +17,7 @@ import Details from "./pages/Host/VansHost/Details"
 import Pricing from "./pages/Host/VansHost/Pricing"
 import Photos from "./pages/Host/VansHost/Photos"
 import NotFound from './pages/NotFound'
+import Login from './pages/Login'
 
 if (process.env.NODE_ENV === "development") {
   makeServer(); 
@@ -28,10 +29,10 @@ function App() {
     <Routes>  
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<Home />} />
+          <Route path="login" element={<Login />}/>
           <Route path="about" element={<About />} />
           <Route path="vans" element={<Vans />} />
           <Route path="vans/:id" element={<VanDetails />} />
-
           <Route path="host" element={<HostLayout />}>
               <Route index element={<Dashboard/>} />
               <Route path="income" element={<Income />}/>
@@ -45,6 +46,7 @@ function App() {
               
               <Route path="reviews" element={<Reviews/>} />
           </Route>
+
           <Route path="*" element={<NotFound />} />
         </Route>
     </Routes>
