@@ -1,19 +1,50 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { getVansHost } from "../../apis";
 
 export default function VansHost() {
-    const url = `/api/host/vans`
     const [vans, setVans] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState()
 
     useEffect(()=>{
-        fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            setVans(data.vans)
-            console.log(data.vans)
-        })
+       async function getHostVans(){
+            setLoading(true)
+            try {
+                const data = await getVansHost()
+                setVans(data)
+            }catch(err) {
+                setError(err)
+            }finally{
+                setLoading(false)
+            }
+       }
+       getHostVans()
+
     },[])
+    
+    if (loading){
+        return (
+            <>
+             <div className="van-host-container">
+                loading...
+             </div>
+            </>
+        )
+    }
+
+    if (error){
+        return (
+            <>
+             <div className="van-host-container">
+                <p> {error.message}</p>
+                <p> {error.status}</p>
+             </div>
+            </>
+        )
+    }
+
 
 
     return (

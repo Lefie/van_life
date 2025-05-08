@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, NavLink,useSearchParams } from "react-router-dom";
 import FilterBtn from "../ui_components/FilterBtn";
-
+import { getVans } from "../apis";
 
 
 export default function Vans() {
@@ -11,19 +11,28 @@ export default function Vans() {
     const [selected, setSelected] = useState()
     const [searchParams, setSearchParams] = useSearchParams()
     const filterType = searchParams.get("type")
-    console.log("search params", searchParams)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+   
     if (searchParams) {
        console.log( searchParams.getAll("type"))
         
     }
     
     useEffect(()=>{
-        console.log("use effect")
-        fetch("/api/vans")
-        .then(res => res.json())
-        .then(data => {
-            setVans(data.vans)
-        })  
+       async function loadAllVans() {
+            setLoading(true)
+            try {
+                const res = await getVans()
+                setVans(res)
+            }catch(err){
+    
+                setError(err)
+            }finally{
+                setLoading(false)
+            }
+       }
+       loadAllVans()
     },[])
 
     const filtered_vans = filterType ? vans.filter((v) => v.type === filterType) : vans
@@ -66,6 +75,25 @@ export default function Vans() {
         } )
         
         
+    }
+
+    if (loading) {
+        return (
+            <>
+             <div className="vans-main-container">
+                <h1>...loading</h1>
+             </div>
+            </>
+        )
+    }
+
+    if (error) {
+       return(
+        <div className="vans-main-container">
+                <p>{error.status}</p>
+                <p>{error.message}</p>
+        </div>
+       ) 
     }
     
     return (

@@ -1,22 +1,56 @@
 import React from "react";
-import { useParams, useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NavLink,Link, Outlet } from "react-router-dom";
 import FilterBtn from "../../ui_components/FilterBtn";
+import { getVanHostId } from "../../apis";
 
 export default function VansDetailsHost() {
     const {id} = useParams()
     console.log("van id",id)
     const [van, setVan] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState()
 
     useEffect(()=>{
-        fetch(`/api/host/vans/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            setVan(data.vans[0])
-        })
+       async function getHostVansId(van_id) {
+        setLoading(true)
+        try{
+            const data = await getVanHostId(van_id)
+            setVan(data)
+
+        }catch(err){
+            console.log(err)
+            setError(err)
+        }finally{
+            setLoading(false)
+        }
+       }
+
+       getHostVansId(id)
     },[])
+
+    if (loading){
+        return (
+            <>
+             <div className="van-host-container">
+                loading...
+             </div>
+            </>
+        )
+    }
+
+    if (error){
+        return (
+            <>
+             <div className="van-host-container">
+                <p> {error.message}</p>
+                <p> {error.status}</p>
+             </div>
+            </>
+        )
+    }
+
     
 
     const styles = {

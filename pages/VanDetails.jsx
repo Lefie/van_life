@@ -3,11 +3,14 @@ import { useParams, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import FilterBtn from "../ui_components/FilterBtn";
+import { getVansById } from "../apis";
 
 export default function VanDetails(){
     const param = useParams()
     const van_id = param.id
     const [vanDetails, setVanDetails] = useState()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
     const location = useLocation()
 
 
@@ -36,13 +39,42 @@ export default function VanDetails(){
     }
 
     useEffect(()=>{
-        fetch(`/api/vans/${van_id}`)
-        .then(res => res.json())
-        .then(data => setVanDetails(data.vans) )
+        async function getVan(id){
+            setLoading(true)
+            try {
+                const van = await getVansById(id)
+                setVanDetails(van)
+
+            }catch(error){
+                console.log("error")
+                setError(error)
+            }finally{
+                setLoading(false)
+            }
+        }
+
+        getVan(van_id)
     },[param.id])
 
     if(vanDetails) {
         console.log("van details",vanDetails)
+    }
+
+    if(loading) {
+        return <>
+         <div className="vans-details-container">
+            <h1> Loading ... </h1>
+         </div>
+        </>
+    }
+
+    if(error){
+        return <>
+         <div className="vans-details-container">
+           <p>{error.message}</p>
+           <p>{error.status}</p>
+         </div>
+        </>
     }
 
 
@@ -51,7 +83,7 @@ export default function VanDetails(){
     return(
         <>
         <div className="vans-details-container">
-            {vanDetails ? 
+            {vanDetails &&
             (
                 <>
                 <div className="van-details">
@@ -67,8 +99,7 @@ export default function VanDetails(){
                 </div>
                 </>
             
-            ):
-            <h1> Loading ... </h1>}
+            )}
         </div>
         </>
     )
