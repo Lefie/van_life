@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { login } from "../apis";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { UserLoginContext } from "../context/UserLoginContext";
 
 export default function Login(){
     const [loginData, setLoginData] = useState({
@@ -10,6 +13,11 @@ export default function Login(){
 
     const [error, setError] = useState()
     const [submitting, setSubmitting] = useState(false)
+    const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location.state)
+    const prevAuthpath = location.state === ""? "/host":location.state
+    const {handleLogin} = useContext(UserLoginContext)
 
     function updateInfo(e){
         const value = e.target.value
@@ -26,10 +34,12 @@ export default function Login(){
         .then(data => {
             setError(null)
             console.log(data)
+            handleLogin()
+            navigate(prevAuthpath || "/host")
         })
         .catch(err => {setError(err)})
         .finally(()=>{
-            setSubmitting(false)
+            setSubmitting(false) 
         })
 
     }
@@ -38,6 +48,7 @@ export default function Login(){
         <>
         <div className="login-form-container">
             <div className="login-form">
+                {location && location.state ? <p className="error-msg"> you have to sign in first </p>:""}
                 <h1>Sign in to your account</h1>
 
                 {<p className="error-msg">{error && error.message}</p>}
@@ -64,9 +75,8 @@ export default function Login(){
                     <br/>
 
                     <button disabled={submitting} type="submit" className="sign-in-btn main-button">
-                        {submitting ? "Signing you in":"sign in"}
-        
-                    </button>
+                        {submitting ? "Signing you in":"sign in"}        
+                    </button>                    
                 </form>
                 <p>Don’t have an account? <span className="login-create-msg">Create one now</span></p>
             </div>

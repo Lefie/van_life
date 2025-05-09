@@ -514,5 +514,16 @@ input {
   color:rgb(254, 107, 107);
 }
 
+.logout-btn {
+  border:none;
+  font-size:1rem;
+  background-color: #FFF7ED;
+  cursor:pointer;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
 
 

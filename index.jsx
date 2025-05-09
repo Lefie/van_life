@@ -18,41 +18,52 @@ import Pricing from "./pages/Host/VansHost/Pricing"
 import Photos from "./pages/Host/VansHost/Photos"
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
+import AuthRequired from './pages/AuthRequired'
+import { UserLoginContext, UserLoginProvider } from './context/UserLoginContext'
+import { useContext } from 'react'
 
 if (process.env.NODE_ENV === "development") {
   makeServer(); 
 }
 
 function App() {
+  const j = useContext(UserLoginContext)
+  console.log("context:", j)
+  
   return (
-  <BrowserRouter>
-    <Routes>  
-        <Route path="/" element={<BaseLayout />}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />}/>
-          <Route path="about" element={<About />} />
-          <Route path="vans" element={<Vans />} />
-          <Route path="vans/:id" element={<VanDetails />} />
-          <Route path="host" element={<HostLayout />}>
-              <Route index element={<Dashboard/>} />
-              <Route path="income" element={<Income />}/>
-              <Route path="vans" element={<VansHost />} />
+    
+    <BrowserRouter>
+    <UserLoginProvider>
+      <Routes>  
+          <Route path="/" element={<BaseLayout />}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />}/>
+            <Route path="about" element={<About />} />
+            <Route path="vans" element={<Vans />} />
+            <Route path="vans/:id" element={<VanDetails />} />
 
-              <Route path="vans/:id" element={<VansDetailsHost />}>
-                <Route index element={<Details />} />
-                <Route path="pricing" element={<Pricing />} />
-                <Route path="photos" element={<Photos />} />
+            <Route element={<AuthRequired />}>
+              <Route path="host" element={<HostLayout />}>
+                  <Route index element={<Dashboard/>} />
+                  <Route path="income" element={<Income />}/>
+                  <Route path="vans" element={<VansHost />} />
+
+                  <Route path="vans/:id" element={<VansDetailsHost />}>
+                    <Route index element={<Details />} />
+                    <Route path="pricing" element={<Pricing />} />
+                    <Route path="photos" element={<Photos />} />
+                  </Route>
+                  <Route path="reviews" element={<Reviews/>} />
               </Route>
-              
-              <Route path="reviews" element={<Reviews/>} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
-        </Route>
-    </Routes>
-  </BrowserRouter>
+      </Routes>
+      </UserLoginProvider>
+    </BrowserRouter>
   )
 }
 
 createRoot(document.getElementById('root')).render(
-  <App />
+    <App />
 )
