@@ -56,4 +56,21 @@ export async function getVanHostId(id) {
     return data.vans[0]
 }
 
+export async function login(creds){
+    const res = await fetch("/api/login",{
+        method:"post",
+        body:JSON.stringify(creds)
+    })
+
+    if(!res.ok) {
+        const error_obj = {
+            message:`error logging in `,
+            status: res.status
+        }
+        throw error_obj
+    }
+
+    const data = await res.json()
+    return data
+}
 

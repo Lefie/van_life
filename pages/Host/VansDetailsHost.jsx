@@ -28,7 +28,7 @@ export default function VansDetailsHost() {
        }
 
        getHostVansId(id)
-    },[])
+    },[id])
 
     if (loading){
         return (

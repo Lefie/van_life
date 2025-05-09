@@ -18,6 +18,10 @@
   width:15rem;
 }
 
+.profile-icon{
+  width:1.8em;
+}
+
 .menu_list {
   display: flex;
   flex-direction: row;
@@ -504,6 +508,10 @@ input {
 .login-create-msg {
   font-weight: bold;
   color:#FF8C38;
+}
+
+.error-msg {
+  color:rgb(254, 107, 107);
 }
 
 
