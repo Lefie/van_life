@@ -3,7 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import FilterBtn from "../ui_components/FilterBtn";
-import { getVansById } from "../apis";
+import { getVanById } from "../apis";
 
 export default function VanDetails(){
     const param = useParams()
@@ -42,7 +42,7 @@ export default function VanDetails(){
         async function getVan(id){
             setLoading(true)
             try {
-                const van = await getVansById(id)
+                const van = await getVanById(id)
                 setVanDetails(van)
 
             }catch(error){

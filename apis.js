@@ -1,59 +1,62 @@
 
-export async function getVans() {
-    const res = await fetch("/api/vans")
-    console.log(res)
-    if (!res.ok) {
-        const error_obj = {
-            message:"error retrieving all the vans",
-            status: res.status
-        }
-        throw error_obj
-    }
-    const data = await res.json()
-    console.log(data)
-    return data.vans
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, doc, getDocs, getDoc, query, where } from "firebase/firestore/lite";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD8K8tJgWs3_SlS4hf3D6iWHTrV1m8cXp8",
+  authDomain: "vanlife-8c467.firebaseapp.com",
+  projectId: "vanlife-8c467",
+  storageBucket: "vanlife-8c467.firebasestorage.app",
+  messagingSenderId: "230164550996",
+  appId: "1:230164550996:web:d59be907a432ca78a624c1"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const vansCollectionRef = collection(db, "vans")
+
+export async function getVans(){
+   
+    const querySnapshot = await getDocs(vansCollectionRef)
+    const vans = querySnapshot.docs.map((doc)=>({
+        ...doc.data(),
+        id: doc.id
+    }))
+    return vans
 }
 
-export async function getVansById(id){
-    const res = await fetch(`/api/vans/${id}`)
-    
-    if(!res.ok) {
-        const error_obj = {
-            message:`error retrieving van ${id}`,
-            status: res.status
-        }
-        throw error_obj
+export async function getVanById(id) {
+    const docRef = doc(db,"vans",id)
+    const docSnap = await getDoc(docRef);
+    const data = {
+        ...docSnap.data(),
+        id:docSnap.id
     }
 
-    const data = await res.json()
-    return data.vans
+    return data
 }
 
 export async function getVansHost(){
-    const res = await fetch('/api/host/vans')
-    const data = await res.json()
-    if(!res.ok) {
-        const error_obj = {
-            message:`error retrieving vans `,
-            status: res.status
-        }
-        throw error_obj
-    }
-    return data.vans
+    const q = query(vansCollectionRef, where("hostId","==","123")) // logged in host
+    const querySnapshot = await getDocs(q)
+    const data = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id:doc.id
+    }))
+    return data
 }
 
 export async function getVanHostId(id) {
-    const res = await fetch(`/api/host/vans/${id}`)
-    const data = await res.json()
-    console.log(data.vans[0])
-    if(!res.ok) {
-        const error_obj = {
-            message:`error retrieving vans `,
-            status: res.status
-        }
-        throw error_obj
-    }
-    return data.vans[0]
+
+  const q = query(vansCollectionRef, where("hostId","==","123"))
+  const querySnapshot = await getDocs(q)
+  const data = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id:doc.id
+  }))
+  const res = data.filter(doc => doc.id ===id)
+  return res[0]
 }
 
 export async function login(creds){
