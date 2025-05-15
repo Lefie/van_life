@@ -525,5 +525,83 @@ input {
   text-decoration: underline;
 }
 
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #FFEAD0;
+  margin-left:-2em;
+  padding-left:2em;
+  padding-top:0.5em;
+  padding-bottom:0.5em;
+  height:25vh;
+}
+
+.dashboard-header > .dashboard-income {
+  display: flex;
+  justify-content: space-between;
+  padding-right:1.2em;
+}
+
+.dashboard-review-scores {
+  background-color: #FFDDB2;
+  margin-left:-2em;
+  padding-left:2em;
+  padding-top:0.5em;
+  padding-bottom:0.5em;
+  height:13vh;
+}
+
+.dashboard-list-vans {
+  margin-top:2em;
+  margin-bottom: 2em;
+}
+
+.dashboard-list-vans > .content {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 2em;
+  padding-bottom: 1.2em;
+  
+}
+
+
+.van-details-content-box {
+  display: flex;
+  background-color: #FFFFFF;
+  margin-right:2em;
+  margin-bottom: 0.7em;
+  padding-top:0.7em;
+  padding-bottom: 0.7em;
+  border-radius: 10px;
+  position: relative;
+}
+
+.van-details-content-box >img {
+  margin-left:2em;
+  width:50px;
+  border-radius: 5px;
+}
+
+.van-details-content-box >.details{
+  display: flex;
+  flex-direction: column;
+  padding-left:2em;
+}
+
+.van-details-container {
+  background-color: #FFF7ED;
+  min-height:85vh;
+  padding-left:2em;
+}
+
+.btn-edit {
+
+  border:none;
+  background-color: #FFFFFF ;
+  position:absolute;
+  right:10px;
+  top:1.6rem;
+}
 
 
