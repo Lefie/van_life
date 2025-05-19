@@ -591,17 +591,59 @@ input {
 
 .van-details-container {
   background-color: #FFF7ED;
-  min-height:85vh;
+  min-height:70vh;
   padding-left:2em;
 }
 
-.btn-edit {
+.van-details-container > .income {
+  padding-top:0.6em;
+  padding-bottom:0.6em;
+}
 
+.van-details-container > .last {
+  color:#4D4D4D;
+  margin-bottom: 0.7em;
+}
+
+.van-details-container  >.transction-header {
+  margin-top:1em;
+}
+
+.btn-edit {
   border:none;
   background-color: #FFFFFF ;
   position:absolute;
-  right:10px;
+  right:1rem;
   top:1.6rem;
 }
 
+.transaction-box {
+  display: flex;
+  flex-direction: column;
+  margin-top:2em;
+  
+}
+
+.transaction-details {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding-left:4em;
+  padding-right:4em;
+  padding-top:1em;
+  padding-bottom:1em;
+  margin-bottom: 2em;
+  margin-right:2em;
+  border-radius: 5px;
+}
+
+
+/* util */
+.bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+}
 
