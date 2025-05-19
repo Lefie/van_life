@@ -58,13 +58,16 @@ export default function Income() {
             <h1>$2,260</h1>
             <p>chart[temp]</p>
 
-            <p className="bold transction-header">Your transcations ({transactionsData.length}) </p>
-
+            <div className="transaction-header">
+                <p className="bold">Your transcations ({transactionsData.length}) </p>
+                <p className="last">last <span className="bold underline">30 days</span></p>
+            </div>
+            
             <div className="transaction-box">
             {transactionsData && transactionsData.map((transction) => (
                 <>
                 <div className="transaction-details">
-                 <p> ${transction.amount}</p>
+                 <p className="bold transaction-amount"> ${transction.amount}</p>
                  <p>{handleDate(transction.date)}</p>
                 </div>
                 </>

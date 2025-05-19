@@ -595,7 +595,7 @@ input {
   padding-left:2em;
 }
 
-.van-details-container > .income {
+.van-details-container > .income, .van-details-container > .your-reviews {
   padding-top:0.6em;
   padding-bottom:0.6em;
 }
@@ -615,6 +615,18 @@ input {
   position:absolute;
   right:1rem;
   top:1.6rem;
+}
+
+.transaction-details > .transaction-amount{
+  font-size:1.5em;
+}
+
+.transaction-header {
+  color:#4D4D4D;
+  margin-top:1em;
+  display: flex;
+  justify-content: space-between;
+  margin-right:1.2em;
 }
 
 .transaction-box {
@@ -637,10 +649,51 @@ input {
   border-radius: 5px;
 }
 
+.review-container-header {
+  display: flex;
+  align-items: center;
+}
+
+.review-container-header > .last {
+  margin-left:1em;
+}
+
+.rating{
+  margin-top:0.6em;
+}
+
+.score {
+  font-size:1.5rem;
+  margin-right: 1rem;
+}
+
+.reviews-header{
+  padding-top:1em;
+}
+
+.review-text {
+  margin-top:0.7em;
+}
+
+.review-content-box {
+  margin-top:1em;
+  padding-bottom: 1em;
+  width:80%;
+  border-bottom: 1px solid #C7C7C7 ;
+}
+
 
 /* util */
 .bold {
   font-weight: bold;
+}
+
+.normal {
+  font-weight: 350;
+}
+
+.gray {
+  color: #8C8C8C;
 }
 
 .underline {
