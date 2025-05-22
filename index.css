@@ -66,14 +66,16 @@
 }
 
 .main-button {
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
   min-width:45%;
   background-color: #FF8C38;
   color:white;
   border:none;
-  height:5vh;
+  padding-top:0.5em;
+  padding-bottom:0.5em;
   border-radius: 5px;
-  margin-bottom:3vh;
 }
 
 .about-content {
@@ -114,7 +116,7 @@
   padding: 2vh 5vh;
 }
 
-.explore > button {
+.about-content-link {
   margin-top:0.6em;
   border: none;
   font-size:1.2rem;
@@ -122,6 +124,7 @@
   color:white;
   background-color: black;
   padding:0.5em 0.6em;
+  text-decoration: none;
 }
 
 .footer {

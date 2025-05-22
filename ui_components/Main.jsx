@@ -1,5 +1,6 @@
 import React from "react";
 import bg2 from "../assets/bg2.png"
+import { Link } from "react-router-dom";
 
 export default function Main({cur}) {
     console.log("Main rendered")
@@ -10,7 +11,7 @@ export default function Main({cur}) {
             <div className="main-content home-content">
                 <h1> You got the travel plans, we got the travel vans. </h1>
                 <p>Add adventure to your life by joining the #vanlife movement. Rent the perfect van to make your perfect road trip.</p>
-                <button className="main-button" > Find your van</button>
+                <Link to="vans" className="main-button" > Find your van</Link>
             </div>
     
             </>
@@ -31,7 +32,7 @@ export default function Main({cur}) {
                 <div className="explore">
                     <h2> Your destination is waiting.
                     Your van is ready.</h2>
-                    <button> Explore our vans </button>
+                    <Link className="about-content-link" to="../vans"> Explore our vans </Link>
                 </div>
             </div>
             </>
