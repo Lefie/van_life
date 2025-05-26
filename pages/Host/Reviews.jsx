@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import IncomeChart from "../../ui_components/IncomeChart";
+import  ReviewChart  from "../../ui_components/ReviewChart"
 
 export default function Reviews() {
 
@@ -49,6 +51,7 @@ export default function Reviews() {
         </div>
         <p className="rating"><span className="bold score">{reviewAvg}</span>overall raitng</p>
         <p> chart[temp] </p>
+        <ReviewChart />
         
         <p className="bold reviews-header">Reviews({reviewsData.length})</p>
         {reviewsData && reviewsData.length >0 && 

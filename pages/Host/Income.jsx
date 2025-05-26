@@ -1,4 +1,5 @@
 import React from "react";
+import IncomeChart from "../../ui_components/IncomeChart";
 
 export default function Income() {
     const date_dict = {
@@ -17,8 +18,8 @@ export default function Income() {
     }
     const transactionsData = [
         { amount: 720, date: "Jan 3, '23", id: "1" },
-        { amount: 560, date: "Dec 12, '22", id: "2" },
-        { amount: 980, date: "Dec 3, '22", id: "3" },
+        { amount: 560, date: "Dec 3, '22", id: "2" },
+        { amount: 980, date: "Dec 12, '22", id: "3" },
     ]
 
     function handleDate(date){
@@ -51,13 +52,13 @@ export default function Income() {
 
     return (
         <>
+        
         <div className="van-details-container">
             <h1 className="income">Income</h1>
             <p className="last">last <span className="bold underline">30 days</span></p>
 
             <h1>$2,260</h1>
-            <p>chart[temp]</p>
-
+            <IncomeChart />
             <div className="transaction-header">
                 <p className="bold">Your transcations ({transactionsData.length}) </p>
                 <p className="last">last <span className="bold underline">30 days</span></p>

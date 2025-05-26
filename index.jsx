@@ -21,6 +21,8 @@ import Login from './pages/Login'
 import AuthRequired from './pages/AuthRequired'
 import { UserLoginContext, UserLoginProvider } from './context/UserLoginContext'
 import { useContext } from 'react'
+import ReviewChart from './ui_components/ReviewChart'
+import IncomeChart from './ui_components/IncomeChart'
 
 if (process.env.NODE_ENV === "development") {
   makeServer(); 
@@ -37,6 +39,7 @@ function App() {
       <Routes>  
           <Route path="/" element={<BaseLayout />}>
             <Route index element={<Home />} />
+            <Route path="test" element={<ReviewChart />} />
             <Route path="login" element={<Login />}/>
             <Route path="about" element={<About />} />
             <Route path="vans" element={<Vans />} />

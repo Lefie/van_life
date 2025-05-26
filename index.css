@@ -685,6 +685,22 @@ input {
   border-bottom: 1px solid #C7C7C7 ;
 }
 
+/* charts */
+.income-chart {
+  margin-left:-2rem;
+  margin:0 auto;
+  width:100vh;
+  max-height: 50vh;
+  background-color: #FFF7ED;
+}
+
+.review-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  max-height: 30vh;
+}
 
 /* util */
 .bold {
