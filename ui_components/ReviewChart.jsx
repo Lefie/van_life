@@ -21,9 +21,27 @@ ChartJS.register(
   ChartDataLabels
 );
 
-export default function ReviewChart() {
-  const rawData = [1, 2, 3, 4, 5];
+export default function ReviewChart(props) {
+  const reviewsData = props.data
+  
+  console.log("can I have access? ",reviewsData)
+
+  function collectStars() {
+    const fiveStarArr = reviewsData.filter(( ele )=> ele.rating === 5)
+    const fourStarArr = reviewsData.filter(( ele )=> ele.rating === 4)
+    const threearArr = reviewsData.filter(( ele )=> ele.rating === 3)
+    const twoStarArr = reviewsData.filter(( ele )=> ele.rating === 2)
+    const oneStarArr = reviewsData.filter(( ele )=> ele.rating === 1)
+  
+    const starArr = [fiveStarArr.length,fourStarArr.length,threearArr.length,twoStarArr.length,oneStarArr.length]
+    
+    return starArr
+  
+  }
+
+  const rawData = collectStars();
   const total = rawData.reduce((a, b) => a + b, 0);
+  console.log("total", total)
   const percentageData = rawData.map((value) =>
     ((value / total) * 100).toFixed(1)
   );
@@ -53,8 +71,8 @@ export default function ReviewChart() {
       },
       datalabels: {
         anchor: 'end',
-        align: 'start',
-        color: '#000',
+        align: 'end',
+        color: '#911',
         formatter: function ( value,context) {
           console.log("what is this context?",context)
           return percentageData[context.dataIndex] + '%';

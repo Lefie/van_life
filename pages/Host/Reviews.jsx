@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import IncomeChart from "../../ui_components/IncomeChart";
 import  ReviewChart  from "../../ui_components/ReviewChart"
+import Rating from '@mui/material/Rating';
+
 
 export default function Reviews() {
 
@@ -28,19 +29,30 @@ export default function Reviews() {
             id: "1",
         },
         {
-            rating: 5,
+            rating: 4,
             name: "Sandy",
             date: "December 12, 2022",
             text: "This is our third time using the Modest Explorer for our travels and we love it! No complaints, absolutely perfect!",
             id: "2",
         },
+        {
+            rating: 3,
+            name: "Jelly",
+            date: "December 10, 2022",
+            text: "Wasn't the best experience. Have stayed at a cleaner place",
+            id: "3",
+        },
+        {
+            rating: 3,
+            name: "Neil",
+            date: "December 7, 2022",
+            text: "The staff is not as friendly. Overall a good experience though",
+            id: "4",
+        },
     ]
 
     const [reviewAvg, setReviewAvg] = useState( () => calculateAverageRating(reviewsData)) 
    
-    
-
-    
 
     return (
         <>
@@ -49,23 +61,20 @@ export default function Reviews() {
             <h1 className="your-reviews">Your reviews</h1>
             <p className="last">last <span className="bold underline"> 30 days</span></p>
         </div>
-        <p className="rating"><span className="bold score">{reviewAvg}</span>overall raitng</p>
-        <p> chart[temp] </p>
-        <ReviewChart />
+        <p className="rating"><span className="bold score">{reviewAvg}</span>Overall Raitng</p>
+
+        <ReviewChart data={reviewsData} />
         
         <p className="bold reviews-header">Reviews({reviewsData.length})</p>
-        {reviewsData && reviewsData.length >0 && 
-
-            reviewsData.map((review)=>(<>
-            <div className="review-content-box">
-                <p>{review.rating}</p>
-                <p className="bold">{review.name} <span className="gray normal">{review.date}</span></p>
-                <p className="review-text">{review.text}</p>
-            </div>
-            </>))
-        }
-     
-
+            {reviewsData && reviewsData.length >0 && 
+                reviewsData.map((review)=>(<>
+                    <div className="review-content-box">
+                        <Rating defaultValue={review.rating} readOnly />
+                        <p className="bold">{review.name} <span className="gray normal">{review.date}</span></p>
+                        <p className="review-text">{review.text}</p>
+                    </div>
+                </>))
+            }
         </div>
         </>
     )
