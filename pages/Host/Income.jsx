@@ -17,9 +17,11 @@ export default function Income() {
         "Dec":"12"
     }
     const transactionsData = [
-        { amount: 720, date: "Jan 3, '23", id: "1" },
-        { amount: 560, date: "Dec 3, '22", id: "2" },
-        { amount: 980, date: "Dec 12, '22", id: "3" },
+        { amount: 220, date: "Mar 3, '25", id: "0" },
+        { amount: 120, date: "Mar 13, '25", id: "0" },
+        { amount: 720, date: "Feb 3, '25", id: "1" },
+        { amount: 560, date: "Jan 3, '25", id: "2" },
+        { amount: 980, date: "Jan 12, '25", id: "3" },
     ]
 
     function handleDate(date){
@@ -55,13 +57,13 @@ export default function Income() {
         
         <div className="van-details-container">
             <h1 className="income">Income</h1>
-            <p className="last">last <span className="bold underline">30 days</span></p>
+            <p className="last">current <span className="bold underline">year</span></p>
 
             <h1>$2,260</h1>
-            <IncomeChart />
+            <IncomeChart data={transactionsData} />
             <div className="transaction-header">
                 <p className="bold">Your transcations ({transactionsData.length}) </p>
-                <p className="last">last <span className="bold underline">30 days</span></p>
+                <p className="last">current <span className="bold underline">year</span></p>
             </div>
             
             <div className="transaction-box">
