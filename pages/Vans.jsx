@@ -6,7 +6,7 @@ import { getVans } from "../apis";
 
 
 export default function Vans() {
-    const url = `/api/vans`
+
     const [vans, setVans] = useState([])
     const [selected, setSelected] = useState()
     const [searchParams, setSearchParams] = useSearchParams()
@@ -16,7 +16,6 @@ export default function Vans() {
    
     if (searchParams) {
        console.log( searchParams.getAll("type"))
-        
     }
     
     useEffect(()=>{
@@ -36,7 +35,7 @@ export default function Vans() {
     },[])
 
     const filtered_vans = filterType ? vans.filter((v) => v.type === filterType) : vans
-
+  
 
     const displayVan = filtered_vans.map(van => (
         <div className={"van"}>

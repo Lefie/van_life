@@ -7,7 +7,9 @@ import { getVanById } from "../apis";
 
 export default function VanDetails(){
     const param = useParams()
+    console.log("param",param)
     const van_id = param.id
+    console.log(van_id)
     const [vanDetails, setVanDetails] = useState()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -42,6 +44,7 @@ export default function VanDetails(){
         async function getVan(id){
             setLoading(true)
             try {
+                console.log("hello")
                 const van = await getVanById(id)
                 setVanDetails(van)
 
