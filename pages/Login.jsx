@@ -18,6 +18,7 @@ export default function Login(){
     console.log(location.state)
     const prevAuthpath = location.state === ""? "/host":location.state
     const {handleLogin} = useContext(UserLoginContext)
+    
 
     function updateInfo(e){
         const value = e.target.value
@@ -33,8 +34,8 @@ export default function Login(){
         login(loginData)
         .then(data => {
             setError(null)
-            console.log(data)
-            handleLogin()
+            console.log("logging in",data)
+            handleLogin(data)
             navigate(prevAuthpath || "/host")
         })
         .catch(err => {setError(err)})

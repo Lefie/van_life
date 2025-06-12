@@ -32,8 +32,8 @@ export async function getVanById(id) {
 
 
 
-export async function getVansHost(){
-    const end_point = url + 'host/vans'
+export async function getVansHost(host_id){
+    const end_point = url + `host/${host_id}/vans`
     const res = await fetch(end_point)
     if (!res.ok) {
         const error_obj = {
@@ -44,11 +44,10 @@ export async function getVansHost(){
     }
     const data = await res.json()
     return data.vans
-
 }
 
-export async function getVanHostId(id) {
-    const end_point = url + `host/vans/${id}`
+export async function getVanHostId(host_id,id) {
+    const end_point = url + `host/${host_id}/vans/${id}`
     const res = await fetch(end_point)
     if (!res.ok) {
         const error_obj = {

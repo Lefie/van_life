@@ -7,7 +7,6 @@ import About from './pages/About'
 import Home from './pages/Home'
 import BaseLayout from './pages/BaseLayout'
 import HostLayout from './pages/Host/HostLayout'
-import { makeServer } from './mock_server'
 import Dashboard from "./pages/Host/Dashboard"
 import Income from './pages/Host/Income'
 import VansHost from './pages/Host/VansHost'
@@ -24,9 +23,7 @@ import { useContext } from 'react'
 import ReviewChart from './ui_components/ReviewChart'
 import IncomeChart from './ui_components/IncomeChart'
 
-if (process.env.NODE_ENV === "development") {
-  makeServer(); 
-}
+
 
 function App() {
   const j = useContext(UserLoginContext)

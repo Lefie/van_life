@@ -12,7 +12,8 @@ export default function VansHost() {
        async function getHostVans(){
             setLoading(true)
             try {
-                const data = await getVansHost()
+                const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+                const data = await getVansHost(userInfo["_id"])
                 setVans(data)
             }catch(err) {
                 setError(err)

@@ -1,14 +1,19 @@
 import React from "react";
 import { getVansHost } from "../../apis";
 import { useEffect, useState } from "react";
-
+import { useContext } from "react";
+import { UserLoginContext } from "../../context/UserLoginContext";
 
 export default function Dashboard() {
     const [vans, setVans] = useState()
     useEffect(()=>{
         async function getHostVans() {
-            const data = await getVansHost()
-            setVans(data)
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+            if(userInfo) {
+                const data = await getVansHost(userInfo["_id"])
+                console.log(data)
+                setVans(data)
+            }
         }
         getHostVans()
     },[])

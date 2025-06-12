@@ -16,8 +16,13 @@ export default function VansDetailsHost() {
        async function getHostVansId(van_id) {
         setLoading(true)
         try{
-            const data = await getVanHostId(van_id)
-            setVan(data)
+            const userinfo = JSON.parse(localStorage.getItem("userInfo"))
+            console.log(userinfo,"from vansdetails host")
+            if (userinfo){
+                const data = await getVanHostId(userinfo["_id"],van_id)
+                setVan(data)
+            }
+            
 
         }catch(err){
             console.log(err)
