@@ -25,8 +25,12 @@
 .menu_list {
   display: flex;
   flex-direction: row;
+  gap:10px;
   justify-content: space-evenly;
-  width:25%;
+  align-items: center;
+  width:30%;
+  max-width:350px;
+ 
 }
 
 .menu_list a {

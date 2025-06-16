@@ -26,8 +26,7 @@ import IncomeChart from './ui_components/IncomeChart'
 
 
 function App() {
-  const j = useContext(UserLoginContext)
-  console.log("context:", j)
+
   
   return (
     
