@@ -26,8 +26,16 @@ export const UserLoginProvider = ({children}) => {
         navigate("/")
     }
 
+    function getCurrentUser() {
+        if (loginStatus === true){
+            const userInfo = localStorage.getItem("userInfo")
+            return userInfo ? JSON.parse(userInfo) : null
+        }
+        return null
+    }
+
     return (
-        <UserLoginContext.Provider value={{loginStatus, logout, handleLogin}}>
+        <UserLoginContext.Provider value={{loginStatus, logout, handleLogin, getCurrentUser}}>
             {children}
         </UserLoginContext.Provider>
     )

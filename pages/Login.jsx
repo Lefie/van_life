@@ -4,6 +4,7 @@ import { login } from "../apis";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { UserLoginContext } from "../context/UserLoginContext";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Login(){
     const [loginData, setLoginData] = useState({
@@ -79,7 +80,7 @@ export default function Login(){
                         {submitting ? "Signing you in":"sign in"}        
                     </button>                    
                 </form>
-                <p>Don’t have an account? <span className="login-create-msg">Create one now</span></p>
+                <p>Don’t have an account? <Link className="link-to-register" to="../register"><span className="login-create-msg">Create one now</span></Link></p>
             </div>
         </div>
         </>

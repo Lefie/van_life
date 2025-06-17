@@ -17,6 +17,7 @@ import Pricing from "./pages/Host/VansHost/Pricing"
 import Photos from "./pages/Host/VansHost/Photos"
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
+import Registration from './pages/Registration'
 import AuthRequired from './pages/AuthRequired'
 import { UserLoginContext, UserLoginProvider } from './context/UserLoginContext'
 import { useContext } from 'react'
@@ -37,6 +38,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="test" element={<ReviewChart />} />
             <Route path="login" element={<Login />}/>
+            <Route path="register" element={<Registration />} />
             <Route path="about" element={<About />} />
             <Route path="vans" element={<Vans />} />
             <Route path="vans/:id" element={<VanDetails />} />
