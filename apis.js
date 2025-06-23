@@ -82,3 +82,28 @@ export async function login(creds){
     return data
 }
 
+export async function registration(creds) {
+    const end_point = url + `users/register`
+    const response = await fetch(end_point, {
+        method: "POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(creds)
+    })
+
+    const data = await response.json()
+
+    if (!response.ok){
+        const error_msg = data["error"]
+        
+        const error_obj = {
+            message: error_msg,
+            status:response.status
+        }
+
+        throw error_obj
+    }
+
+
+    return data
+}
+

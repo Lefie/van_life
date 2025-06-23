@@ -23,6 +23,7 @@ import { UserLoginContext, UserLoginProvider } from './context/UserLoginContext'
 import { useContext } from 'react'
 import ReviewChart from './ui_components/ReviewChart'
 import IncomeChart from './ui_components/IncomeChart'
+import UserDashboard from './pages/User/Dashboard'
 
 
 
@@ -55,6 +56,10 @@ function App() {
                     <Route path="photos" element={<Photos />} />
                   </Route>
                   <Route path="reviews" element={<Reviews/>} />
+              </Route>
+                <Route path=":username">
+                  <Route index element={<UserDashboard />} />
+                <Route />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />

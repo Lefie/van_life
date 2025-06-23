@@ -1,6 +1,10 @@
-import React from "react";
+import React, { use, useEffect } from "react";
 import { useState } from "react";
-
+import { registration } from "../apis";
+import { useContext } from "react";
+import { UserLoginContext } from "../context/UserLoginContext";
+import { login } from "../apis";
+import { useNavigate } from "react-router-dom";
 
 export default function Registration(){
     const [formData, setFormData] = useState({
@@ -9,10 +13,28 @@ export default function Registration(){
        password:'',
        isHost:false
     })
+    const [error, setError] =  useState()
+    const [successMsg, setSuccessMsg] = useState('')
+    const {handleLogin} = useContext(UserLoginContext)
+    const navigate = useNavigate()
 
     async function handleSubmission(){
+       
         console.log("handle submission")
-        console.log(formData)
+        // TODO: handle empty fields in form
+
+        // assuming the form is properly filled
+        registration(formData)
+        .then(data => {
+            console.log(data["msg"])
+            setError(null)
+            setSuccessMsg(data["msg"])
+        })
+        .catch(err => {
+            console.log(err)
+            setError(err)
+        })
+
     }
 
     function handleChange(e){
@@ -26,6 +48,24 @@ export default function Registration(){
             [name]:value
         }))
     }
+
+    useEffect(()=>{
+        if(successMsg) {
+            setTimeout(()=>{
+                setSuccessMsg('')
+                console.log("user created success ")
+                login(formData)
+                .then(data => {
+                    console.log("logging in",data)
+                    handleLogin(data)
+                    const name = formData["name"]
+                    console.log(name)
+                    navigate(`../${name}`)
+                })
+                .catch(err => {setError(err)})
+            },3000)
+        }
+    },[successMsg])
 
 
 
@@ -43,6 +83,8 @@ export default function Registration(){
                </div>
                 <button type="submit">register</button>
             </form>
+            {error && <p className="error-msg">{error["message"]}</p>}
+            {successMsg && <p className="success-msg">{successMsg}</p>}
         </div>
 
         </>

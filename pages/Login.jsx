@@ -36,8 +36,17 @@ export default function Login(){
         .then(data => {
             setError(null)
             console.log("logging in",data)
+            const name = data["user"]["name"]
+            const isHost = data["user"]["isHost"]
+           
             handleLogin(data)
-            navigate(prevAuthpath || "/host")
+            // if the user is a host
+            if (!isHost){
+                navigate(`../${name}`)
+            }else {
+                navigate("/host")
+            }
+
         })
         .catch(err => {setError(err)})
         .finally(()=>{
