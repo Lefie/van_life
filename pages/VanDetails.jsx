@@ -30,6 +30,7 @@ export default function VanDetails(){
     }
 
     function generateBackLink(){
+        console.log(location)
         if ( location.state ) {
             if(location.state.search){
                 
@@ -38,6 +39,7 @@ export default function VanDetails(){
                 return ""
             }
         }
+        return ""
     }
 
     useEffect(()=>{

@@ -23,7 +23,10 @@ import { UserLoginContext, UserLoginProvider } from './context/UserLoginContext'
 import { useContext } from 'react'
 import ReviewChart from './ui_components/ReviewChart'
 import IncomeChart from './ui_components/IncomeChart'
+import UserLayout from './pages/User/UserLayout'
 import UserDashboard from './pages/User/Dashboard'
+import RentalHisotry from './pages/User/RentalHistory'
+import Upcoming from './pages/User/Upcoming'
 
 
 
@@ -57,8 +60,10 @@ function App() {
                   </Route>
                   <Route path="reviews" element={<Reviews/>} />
               </Route>
-                <Route path=":username">
+                <Route path=":username" element={<UserLayout />}>
                   <Route index element={<UserDashboard />} />
+                  <Route path="rental_history" element={<RentalHisotry />} />
+                  <Route path="upcoming_rental" element={<Upcoming />} />
                 <Route />
               </Route>
             </Route>

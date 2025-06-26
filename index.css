@@ -5,7 +5,8 @@
 }
 
 .nav-bar {
-  height:15vh;
+  width: 100%;
+  height:9rem;
   background-color: #FFF7ED ;
   display: flex;
   align-items: center;
@@ -791,6 +792,101 @@ input {
   align-items: center;
   width:100%;
   max-height: 30vh;
+}
+
+/* user */
+.user-links {
+  background-color: #FFF7ED;
+  height: 4rem;
+  display: flex;
+  padding-left:2.5rem;
+  column-gap:2.5em;
+}
+
+.user-links a {
+  color:#4D4D4D;
+  text-decoration: none;
+}
+
+/* user dashboard */
+.user-dashboard-container, .rental-history-container, .upcoming-rental-container{
+  min-height:75vh;
+  background-color: #FFF7ED;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-dashboard-container h1 {
+  padding-left:2rem;
+  height:3.5rem;
+  background-color: #FFDDB2;
+  align-content: center;
+}
+
+.user-dashboard-container section  {
+  margin-top:1.5rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.saved{
+  display: flex;
+  flex-direction: column;
+}
+
+.saved h2 {
+  padding-left: 2rem;
+}
+
+.no-saved-vans {
+  padding-left: 2rem;
+  margin-top:5rem;
+  color:#5c5b5b;
+}
+
+.saved_vans_container {
+  margin-top:1rem;
+  /* border:1px solid navy; */
+  padding-left: 2rem;
+  flex-grow:1;
+  display: flex;
+  flex-wrap: wrap;
+  gap:1em;
+}
+
+.saved_vans_details {
+  border: 2px solid orange;
+  height:15rem;
+  width:10rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding:1rem;
+}
+
+.saved_vans_details img {
+  display: block;
+  margin:0 auto;
+  width:7rem;
+  object-fit: cover;
+  margin-top:0.125em;
+  border-radius: 1rem;
+}
+
+.saved_van_name {
+  margin-top:1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.saved_vans_container a {
+  text-decoration: none;
+  color:black;
+}
+
+.saved_vans_details:hover {
+  transform: scale(1.065);
+  transition:0.8s;
 }
 
 /* util */
