@@ -39,7 +39,7 @@ export default function Dashboard() {
                     {vans ? vans.map(van => (
                         <>
                             <article className="saved_vans_details">
-                                <NavLink to={`../vans/${van.id}`}>
+                                <NavLink className="non-deco" to={`../vans/${van.id}`}>
                                     <img src={`${van.imageUrl}`} alt="van-detail" />
                                     <p className="saved_van_name">{van.name}</p>
                                 </NavLink>
@@ -49,9 +49,6 @@ export default function Dashboard() {
                     )): <>
                     <p className="no-saved-vans">Oops! You don't have anything saved yet!</p>
                     </>}
-
-
-
                 </article>
             </section>
         </section>

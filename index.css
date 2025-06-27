@@ -816,7 +816,7 @@ input {
   flex-direction: column;
 }
 
-.user-dashboard-container h1 {
+.user-dashboard-container h1, .rental-history-container h2, .upcoming-rental-container h2 {
   padding-left:2rem;
   height:3.5rem;
   background-color: #FFDDB2;
@@ -844,7 +844,7 @@ input {
   color:#5c5b5b;
 }
 
-.saved_vans_container {
+.saved_vans_container, .rented_vans_history_container, .upcoming_vans_history_container {
   margin-top:1rem;
   /* border:1px solid navy; */
   padding-left: 2rem;
@@ -854,7 +854,7 @@ input {
   gap:1em;
 }
 
-.saved_vans_details {
+.saved_vans_details,.rented_vans_details,.upcoming_vans_details {
   border: 2px solid orange;
   height:15rem;
   width:10rem;
@@ -864,7 +864,7 @@ input {
   padding:1rem;
 }
 
-.saved_vans_details img {
+.saved_vans_details img, .rented_vans_details img, .upcoming_vans_details img {
   display: block;
   margin:0 auto;
   width:7rem;
@@ -873,21 +873,24 @@ input {
   border-radius: 1rem;
 }
 
-.saved_van_name {
+.saved_van_name, .rented_van_name, .upcoming_van_name {
   margin-top:1rem;
   font-weight: 500;
   text-align: center;
 }
 
-.saved_vans_container a {
+
+.non-deco {
   text-decoration: none;
   color:black;
 }
 
-.saved_vans_details:hover {
+.saved_vans_details:hover, .rented_vans_details:hover, .upcoming_vans_details:hover {
   transform: scale(1.065);
   transition:0.8s;
 }
+
+ 
 
 /* util */
 .bold {
