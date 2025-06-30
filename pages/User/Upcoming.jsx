@@ -7,6 +7,7 @@ import { getVans } from "../../apis";
 export default function Upcoming() {
     const [vans, setVans] = useState()
     const [error, setError] = useState()
+    const { username } = useParams()
 
     useEffect(()=>{
             async function getAllVans() {
@@ -28,8 +29,9 @@ export default function Upcoming() {
     return (
         <>
         <section className="upcoming-rental-container">
-            <h2>Upcoming Rental</h2>
+            <h1>Welcome {username}!</h1>
             <section className="upcoming-rentals">
+                <h2>Upcoming Rental</h2>
                 <article className="upcoming_vans_history_container">
                     {vans ? vans.map(van => (
                         <>

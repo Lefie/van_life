@@ -9,11 +9,14 @@ export default function VanDetails(){
     const param = useParams()
     console.log("param",param)
     const van_id = param.id
-    console.log(van_id)
-    const [vanDetails, setVanDetails] = useState()
+    console.log("van id",van_id)
+    const [vanDetails, setVanDetails] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const location = useLocation()
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+    const [hidden, setHidden] = useState("hidden")
 
 
     function generateName() {
@@ -82,6 +85,12 @@ export default function VanDetails(){
         </>
     }
 
+    function handlePopupVisibility() {
+        if (hidden === "hidden") {
+            console.log("flip to non hidden")
+            setHidden("")
+        }
+    }
 
   
 
@@ -99,8 +108,36 @@ export default function VanDetails(){
                         <h2>{vanDetails.name}</h2>
                         <p className="price">${vanDetails.price}<span>/Day</span></p>
                         <p>{vanDetails.description}</p>
-                        <button className="main-button"> Rent this Van</button>
+                        <button onClick={handlePopupVisibility} className="main-button"> Rent this Van</button>
                     </div>
+                    <section className={`rental-pop-up ${hidden} show`}>
+                        {vanDetails && (
+                            <>
+                                <p>book {vanDetails["name"]} now! </p>
+                                <button onClick={()=>{setHidden("hidden")}}>X</button>
+                                <article>
+                                    <label htmlFor="rental-start-date"> Your desired rental start date</label>
+                                    <input
+                                        type="date"
+                                        id="rental-start-date"
+                                        name="rental-start-date"
+
+                                     />
+                                </article>
+
+                                <article>
+                                    <label htmlFor="rental-end-date"> Your desired rental start date</label>
+                                    <input
+                                        type="date"
+                                        id="rental-end-date"
+                                        name="rental-end-date"
+                                     />
+                                </article>
+
+                                <button> Book </button>
+                            </>
+                        )}
+                    </section>
                 </div>
                 </>
             

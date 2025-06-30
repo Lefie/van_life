@@ -44,7 +44,7 @@ export default function Nav() {
         <div className="nav-bar">
             <Link to="/"><img className="logo-img" src={logo} /> </Link>
             <div className={`menu_list`}>
-                <NavLink style={({isActive}) => isActive ? styles : null} to={dash} >Dash</NavLink>
+                {current_user &&  <NavLink style={({isActive}) => isActive ? styles : null} to={dash} >Dash</NavLink> }
                 <NavLink style={({isActive}) => isActive ? styles : null} to="about">About</NavLink>
                 <NavLink style={({isActive}) => isActive ? styles : null} to="vans">Vans</NavLink>
                 {loginStatus === true ? <button className="logout-btn" onClick={logout}>logout</button>: 

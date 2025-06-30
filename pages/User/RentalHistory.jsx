@@ -7,6 +7,7 @@ import { getVans } from "../../apis";
 export default function RentalHisotry(){
     const [vans, setVans] = useState()
     const [error, setError] = useState()
+    const { username } = useParams()
 
     useEffect(()=>{
             async function getAllVans() {
@@ -27,8 +28,9 @@ export default function RentalHisotry(){
     return (
         <>
         <section className="rental-history-container">
-            <h2>Rental History</h2>
+            <h1>Welcome {username}!</h1>
             <section className="rental-history">
+                <h2>Rental History</h2>
                 <article className="rented_vans_history_container">
                     {vans ? vans.map(van => (
                         <>

@@ -4,10 +4,13 @@
   font-family: "Inter", sans-serif;
 }
 
+body {
+  background-color: #FFF7ED ;
+}
+
 .nav-bar {
   width: 100%;
   height:9rem;
-  background-color: #FFF7ED ;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -71,16 +74,19 @@
 }
 
 .main-button {
+  display: block;
+  margin:0 auto;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  min-width:45%;
+  width:22rem;
   background-color: #FF8C38;
   color:white;
   border:none;
   padding-top:0.5em;
   padding-bottom:0.5em;
-  border-radius: 5px;
+  border-radius: 1rem;
+  margin-bottom: 1em;
 }
 
 .about-content {
@@ -264,7 +270,8 @@
 }
 
 .van-img-details{
-  max-width:15rem;
+  width:12rem;
+  border-radius: 1.5rem;
 }
 
 .van-details {
@@ -281,14 +288,15 @@
 }
 
 .van-details-content {
-  margin-top:5vh;
-  min-height: 30vh;
-  max-width: 70%;
+  margin-top:2.5em;
+  margin-bottom: 1em;
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: space-between;
-  row-gap: 2vh;
+  row-gap: 1.12rem;
+  max-width: 600px;
+  
 }
 
 .van-details-content > .price {
@@ -704,6 +712,13 @@ input {
   margin-top:1em;
 }
 
+.rental-pop-up {
+  background-color: #FFDDB2;
+  border:1px solid purple;
+  position:fixed;
+  top:15em;
+}
+
 .btn-edit {
   border:none;
   background-color: #FFFFFF ;
@@ -816,25 +831,27 @@ input {
   flex-direction: column;
 }
 
-.user-dashboard-container h1, .rental-history-container h2, .upcoming-rental-container h2 {
+.user-dashboard-container h1, .rental-history-container h1, .upcoming-rental-container h1 {
   padding-left:2rem;
   height:3.5rem;
   background-color: #FFDDB2;
   align-content: center;
 }
 
-.user-dashboard-container section  {
+.user-dashboard-container section, 
+.rental-history-container section,
+.upcoming-rental-container section  {
   margin-top:1.5rem;
   flex-grow: 1;
   overflow-y: auto;
 }
 
-.saved{
+.saved, .rental-history, .upcoming-rental-container{
   display: flex;
   flex-direction: column;
 }
 
-.saved h2 {
+.saved h2, .rental-history h2, .upcoming-rental-container h2 {
   padding-left: 2rem;
 }
 
@@ -909,3 +926,11 @@ input {
   text-decoration: underline;
 }
 
+.hidden {
+  opacity: 0;
+ 
+}
+
+.show {
+  transition: opacity 0.5s ease-out;
+}

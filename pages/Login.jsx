@@ -16,7 +16,7 @@ export default function Login(){
     const [submitting, setSubmitting] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location.state)
+    console.log("log in page location state",location.state)
     const prevAuthpath = location.state === ""? "/host":location.state
     const {handleLogin} = useContext(UserLoginContext)
     
