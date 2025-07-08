@@ -55,13 +55,13 @@ export default function Upcoming() {
             <section className="upcoming-rentals">
                 <h2>Upcoming Rental</h2>
                 <article className="upcoming_vans_history_container">
-                    {vans ? vans.map(van => (
+                    {vans && vans.length > 0 ? vans.map(van => (
                         <>
                             <article className="upcoming_vans_details">
                                 <NavLink className="non-deco" to={`../../vans/${van.id}`}>
                                     <img src={`${van.imageUrl}`} alt="van-detail" />
                                     <p className="upcoming_van_name">{van.name}</p>
-                                    <p className="upcoming_van_dates">{van.rental_start_date} ~ {van.rental_end_date}</p>
+                                    <p className="van_dates">{van.rental_start_date} ~ {van.rental_end_date}</p>
                                 </NavLink>
                             </article>
                         </>

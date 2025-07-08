@@ -36,7 +36,7 @@ export default function Dashboard() {
             <section className="saved">
                 <h2>Saved Vans </h2>
                 <article className="saved_vans_container">
-                    {vans ? vans.map(van => (
+                    {vans && vans.length > 0 ? vans.map(van => (
                         <>
                             <article className="saved_vans_details">
                                 <NavLink className="non-deco" to={`../vans/${van.id}`}>

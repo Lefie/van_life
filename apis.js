@@ -157,6 +157,32 @@ export async function get_upcoming_rentals(user_data) {
         }
         return error_obj
     }
+}
+
+// retrieval rental history by user id
+export async function get_rental_history(user_data){
+    const end_point = url + `rentals/rental_history`
+    const res = await fetch(end_point, {
+        method: "POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(user_data)
+    })
+
+    const data = await res.json()
+    console.log(data, "get rental history api call")
+    if (data && data["success"] === "true") {
+        return data["rental history list"]
+    }
+
+    if (!res.ok) {
+        const error_msg = data["error"]
+
+        const error_obj = {
+            message: error_msg,
+            status:res.status
+        }
+        return error_obj
+    }
 
 }
 
