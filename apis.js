@@ -133,4 +133,30 @@ export async function book_rental(rental_obj) {
     }
 }
 
+// retrieve upcoming rental 
+export async function get_upcoming_rentals(user_data) {
+    const end_point = url + `rentals/upcoming_rentals`
+    console.log(user_data)
+    const res = await fetch(end_point, {
+        method: 'POST',
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(user_data)
+    })
+    const data = await res.json()
+    if (data && data["success"] === "true"){
+        console.log(data)
+        return data["upcoming_rentals_list"]
+    }
+
+    if (!res.ok) {
+        const error_msg = data["error"]
+
+        const error_obj = {
+            message: error_msg,
+            status:res.status
+        }
+        return error_obj
+    }
+
+}
 

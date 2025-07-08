@@ -956,6 +956,12 @@ input {
   transition:0.8s;
 }
 
+.upcoming_van_dates{
+  font-size:1rem;
+  text-align: center;
+  margin-top:0.3em;
+}
+
 p.msg-display {
   margin:0;
 }

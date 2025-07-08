@@ -6,6 +6,7 @@ import FilterBtn from "../ui_components/FilterBtn";
 import { getVanById,book_rental } from "../apis";
 import StatusBtn from "../ui_components/StatusBtn";
 import Message from "../ui_components/Message";
+import { useNavigate } from "react-router-dom";
 
 export default function VanDetails(){
     const param = useParams()
@@ -22,6 +23,7 @@ export default function VanDetails(){
     const [bookSuccess, setBookSuccess] = useState(false)
     const [bookFail, setBookFail] = useState(false)
     const [msg, setMsg] = useState(null)
+    const navigate = useNavigate()
 
     function generateName() {
         if(location.state){
@@ -134,7 +136,7 @@ export default function VanDetails(){
             }
 
             if (endDateObj < startDateObj) {
-                setMsg("end date must be at least today")
+                setMsg("end date must be at least the start date")
                 setTimeout(()=>{
                     setMsg(null)
                 },2000)
@@ -157,6 +159,9 @@ export default function VanDetails(){
                     setTimeout(()=>{
                         setBookSuccess(false)
                         console.log("navigate elsewhere")
+                        const userinfo = JSON.parse(localStorage.getItem("userInfo"))
+                        const username = userinfo["name"]
+                        navigate(`/${username}/upcoming_rental`)
                     },3000)
                 }else{
                     setError(resp["error"])
