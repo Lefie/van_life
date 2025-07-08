@@ -713,11 +713,60 @@ input {
 }
 
 .rental-pop-up {
-  background-color: #FFDDB2;
-  border:1px solid purple;
-  position:fixed;
-  top:15em;
+  position: fixed;
+  top:10em;
+  width: 80vw;
 }
+
+.rental-pop-up-form {
+  padding:1rem;
+  min-width: 30em;
+  background-color: #ffefda;
+  border:2px solid #FF8C38;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:1rem;
+  border-radius: 1rem;
+  position:relative;
+}
+
+.cancel-btn {
+  position:absolute;
+  right:1rem;
+  top:0.5rem;
+  margin-top:1rem;
+  border:none;
+  background-color:#FF8C38;
+  width:1.5rem;
+  height:1.5rem;
+  border-radius: 0.12rem;
+  color:white;
+  transition:background-color 0.8s, color 0.8s;
+}
+
+.book-btn {
+  border:none;
+  background-color:#FF8C38;
+  width:5rem;
+  height:1.5rem;
+  border-radius: 0.52rem;
+  color:white;
+  transition: background-color 0.8s, color 0.8s;
+}
+
+.book-btn:hover, .cancel-btn:hover {
+  background-color:#ff6d0b;
+  cursor:pointer;
+}
+
+.book-btn:active, .cancel-btn:active {
+  background-color:#ffbb8e;
+  cursor:pointer;
+}
+
+/* .cancel-btn:hover 
+.cancel-btn:active */
 
 .btn-edit {
   border:none;
@@ -907,6 +956,9 @@ input {
   transition:0.8s;
 }
 
+p.msg-display {
+  margin:0;
+}
  
 
 /* util */
@@ -928,9 +980,30 @@ input {
 
 .hidden {
   opacity: 0;
- 
 }
 
 .show {
   transition: opacity 0.5s ease-out;
 }
+
+.success-btn, .fail-btn {
+  padding:0.2rem 0.5rem;
+  border:none;
+  border-radius: 1rem ;
+  width:5rem;
+}
+
+.success-btn {
+  background-color: #91e79f;
+  color:rgb(3, 80, 3);
+}
+
+.fail-btn {
+  background-color: #fc4444;
+  color:rgb(80, 3, 3);
+}
+
+.fail {
+  color: #fc4444;
+}
+
