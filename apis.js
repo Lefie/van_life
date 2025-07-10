@@ -186,3 +186,71 @@ export async function get_rental_history(user_data){
 
 }
 
+// add a saved rental 
+export async function add_to_saved_vans(van_id, user_id) {
+    const end_point = url  + `save/${van_id}`
+    
+    const res = await fetch(end_point, {
+        method: "POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(user_id)
+    })
+
+    const data = await res.json()
+    if (data && data["success"] === "true") {
+        console.log("saving van", data)
+        return data
+    }
+
+    if (!res.ok) {
+        const error_msg = data["error"]
+
+        const error_obj = {
+            message: error_msg,
+            status:res.status
+        }
+        return error_obj
+    }
+}
+
+export async function remove_from_saved_vans(van_id, user_id) {
+    const end_point = url + `unsave/${user_id}/${van_id}`
+    
+    const res = await fetch(end_point, {
+        method: 'DELETE'
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+        const error_msg = data["error"]
+
+        const error_obj = {
+            message: error_msg,
+            status:res.status
+        }
+        return error_obj
+    }
+
+}
+
+export async function get_all_vans_saved_by_user(user_id) {
+    const end_point = url+`saved_vans/${user_id}`
+    const res = await fetch(end_point)
+    const data = await res.json()
+    if (data && data["success"] === "true") {
+        console.log(data)
+        return data
+    }
+
+    if (!res.ok) {
+        const error_msg = data["error"]
+
+        const error_obj = {
+            message: error_msg,
+            status:res.status
+        }
+        return error_obj
+    }
+}
+

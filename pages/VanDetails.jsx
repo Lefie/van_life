@@ -3,16 +3,14 @@ import { useParams, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import FilterBtn from "../ui_components/FilterBtn";
-import { getVanById,book_rental } from "../apis";
+import { getVanById, book_rental, add_to_saved_vans, remove_from_saved_vans, get_all_vans_saved_by_user } from "../apis";
 import StatusBtn from "../ui_components/StatusBtn";
 import Message from "../ui_components/Message";
 import { useNavigate } from "react-router-dom";
 
 export default function VanDetails(){
     const param = useParams()
-    console.log("param",param)
     const van_id = param.id
-    console.log("van id",van_id)
     const [vanDetails, setVanDetails] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -23,6 +21,9 @@ export default function VanDetails(){
     const [bookSuccess, setBookSuccess] = useState(false)
     const [bookFail, setBookFail] = useState(false)
     const [msg, setMsg] = useState(null)
+    const [active, setIsActive] = useState(false)
+    const [user_id, setUserId] = useState(JSON.parse(localStorage.getItem("userInfo"))["_id"])
+    const [savedVans, setSavedVans] = useState()
     const navigate = useNavigate()
 
     function generateName() {
@@ -57,6 +58,9 @@ export default function VanDetails(){
             try {
                 console.log("hello")
                 const van = await getVanById(id)
+                const vans_saved_by_user = await get_all_vans_saved_by_user(user_id)
+                const saved_vans_arr = vans_saved_by_user["saved_vans"]
+                setSavedVans(saved_vans_arr)
                 setVanDetails(van)
 
             }catch(error){
@@ -70,6 +74,17 @@ export default function VanDetails(){
         getVan(van_id)
     },[param.id])
 
+    useEffect(()=>{
+        if (savedVans) {
+            console.log(savedVans)
+            savedVans.map(saved_van => {
+                if (saved_van["van_id"] === van_id) {
+                    setIsActive(true)
+                }
+            })
+        }
+    },[savedVans])
+    
     if(vanDetails) {
         console.log("van details",vanDetails)
     }
@@ -98,6 +113,23 @@ export default function VanDetails(){
         }
     }
 
+    // if this van is in saved_van db then it should be active - useEffect
+
+
+    function handleHeart(van_id) {
+        if (active === true){
+            console.log("active false")
+            remove_from_saved_vans(van_id, user_id)
+            setIsActive(false)
+        }else{
+            console.log("active true")
+            console.log("Add current van to saved db")
+            console.log(van_id, user_id)
+            add_to_saved_vans(van_id, {"user_id":user_id})
+            setIsActive(true)
+        }
+    }
+
     function updateStartDateVal(e){
         console.log("start date",e.target.value)
         setStartDate(e.target.value)
@@ -110,8 +142,6 @@ export default function VanDetails(){
 
 
     function book(){
-        const loggedin_user_info = localStorage.getItem("userInfo")
-        const user_id =  JSON.parse(loggedin_user_info)["_id"]
         // make sure have both dates
         if (startDate === "" || endDate === ""){
             setMsg("please enter both dates")
@@ -181,6 +211,7 @@ export default function VanDetails(){
            
         }
     }
+
   
     return(
         <>
@@ -191,6 +222,9 @@ export default function VanDetails(){
                 <div className="van-details">
                     <Link className="back" to={`..${generateBackLink()}`} relative="path"><p> Back to {generateName()}  vans</p></Link>
                     <img className="van-img-details" src={vanDetails.imageUrl} />
+                    {active ? <i className="fa-solid fa-heart heart-icon-style solid-heart" onClick={()=> {handleHeart(van_id)}}></i> :
+                    <i className="fa-regular fa-heart heart-icon-style" onClick={()=> {handleHeart(van_id)}}></i> }
+                   
                     <div className="van-details-content">
                         <FilterBtn  name={`${vanDetails.type}`} />
                         <h2>{vanDetails.name}</h2>
@@ -198,7 +232,7 @@ export default function VanDetails(){
                         <p>{vanDetails.description}</p>
                         <button onClick={handlePopupVisibility} className="main-button"> Rent this Van</button>
                     </div>
-                    <section className={`rental-pop-up ${hidden} show`}>
+                    <section className={`rental-pop-up ${hidden}`}>
                         {vanDetails && (
                             <>
                                 <form action={book} className="rental-pop-up-form">

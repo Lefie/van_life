@@ -965,7 +965,17 @@ input {
 p.msg-display {
   margin:0;
 }
- 
+
+.heart-icon-style {
+  margin-top:0.5em;
+  font-size: 1.5rem;
+}
+
+.heart-icon-style:hover {
+  cursor: pointer !important;
+  color:red;
+  transition: 0.2s;
+}
 
 /* util */
 .bold {
@@ -985,11 +995,7 @@ p.msg-display {
 }
 
 .hidden {
-  opacity: 0;
-}
-
-.show {
-  transition: opacity 0.5s ease-out;
+  display: none;
 }
 
 .success-btn, .fail-btn {
@@ -1009,7 +1015,7 @@ p.msg-display {
   color:rgb(80, 3, 3);
 }
 
-.fail {
+.fail , .solid-heart{
   color: #fc4444;
 }
 
