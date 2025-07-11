@@ -672,11 +672,11 @@ input {
 .van-details-content-box {
   display: flex;
   background-color: #FFFFFF;
-  margin-right:2em;
   margin-bottom: 0.7em;
   padding-top:0.7em;
   padding-bottom: 0.7em;
   border-radius: 10px;
+  max-width: 470px;
   position: relative;
 }
 
