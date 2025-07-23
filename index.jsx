@@ -40,7 +40,6 @@ function App() {
       <Routes>  
           <Route path="/" element={<BaseLayout />}>
             <Route index element={<Home />} />
-            <Route path="test" element={<ReviewChart />} />
             <Route path="login" element={<Login />}/>
             <Route path="register" element={<Registration />} />
             <Route path="about" element={<About />} />
