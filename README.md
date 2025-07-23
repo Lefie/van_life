@@ -1,12 +1,51 @@
-# React + Vite
+## 🚐 Van Life App
+Van Life is a full‑stack van rental management platform where users can browse vans, save favorites, and book rentals, while hosts can manage their vans and track ratings.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Van Life began as a guided project from the [Scrimba Frontend Developer Career Path](https://scrimba.com/frontend-path-c0j) In the course, I built out the UI/UX for login, registration, van listings, and a host’s dashboard, originally using Firebase as the backend service. From there, I significantly expanded the project by introducing a custom Flask and MongoDB backend and implementing additional features:
+* Integrated Chart.js in the host dashboard to visualize van ratings.
+* Introduced user roles during registration (host or non‑host).
+* Added features for non-host users:
+    * Save and unsave vans, 
+    * Book vans with specific date ranges,
+    * View upcoming rentals and rental history.
 
-Currently, two official plugins are available:
+**See Demo Here**: [Van Life App](https://van-life-gold.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Selected Screens
+* Home Page /
+![image1](./assets/screenshots/screenshot1.png)
+This is what the home page looks like. You can browse all the vans by clicking on the "Find your van" button. You can also sign in by clicking on the profile icon in the dashboard. 
 
-## Expanding the ESLint configuration
+* Vans /vans
+![image2](./assets/screenshots/screenshot2.png)
+This page lets users browse through all the vans option listed without needing authentication.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* View vans by filter /vans?type=rugged
+![image3](./assets/screenshots/screenshot3.png)
+While viewing vans, users can browse vans that belong to a certain type
+
+* Host dashboard view 
+Here are some screens from a host's dashboard
+* /host 
+![image4](./assets/screenshots/screenshot5.png)
+
+* /host/income
+![image5](./assets/screenshots/screenshot6.png)
+
+* /host/reviews
+![image6](./assets/screenshots/screenshot4.png)
+
+* User dashboard view /{username}
+![image7](./assets/screenshots/screenshot7.png)
+
+* rent and save vans /vans/{van_id}
+![image8](./assets/screenshots/screenshot8.png)
+![image9](./assets/screenshots/screenshot9.png)
+
+* see upcoming rentals /{username}/upcoming_rental
+![image10](./assets/screenshots/screenshot10.png)
+
+### Future Improvements 
+* Replace hardcoded data (review data and host income data) with actual aggregated data from users and rentals.
+* Implement additional endpoints so hosts can manage their vans and view/edit incoming rentals.
+* Add a map-based search feature allowing users to search for vans by location.
