@@ -1,5 +1,5 @@
-//const url = `http://127.0.0.1:5000/api/`
-const url = `https://vanlifebackend-production-5f4c.up.railway.app/api/`
+const url = `http://127.0.0.1:5000/api/`
+//const url = `https://vanlifebackend-production-5f4c.up.railway.app/api/`
 
 
 // handle vans
@@ -33,7 +33,7 @@ export async function getVanById(id) {
 }
 
 export async function getVansHost(host_id){
-    const end_point = url + `host/${host_id}/vans`
+    const end_point = url + `vans/host/${host_id}`
     const res = await fetch(end_point)
     if (!res.ok) {
         const error_obj = {
@@ -46,8 +46,9 @@ export async function getVansHost(host_id){
     return data.vans
 }
 
+// allows host to retrieve a rental owned by host 
 export async function getVanHostId(host_id,id) {
-    const end_point = url + `host/${host_id}/vans/${id}`
+    const end_point = url + `vans/${id}/host/${host_id}`
     const res = await fetch(end_point)
     if (!res.ok) {
         const error_obj = {
@@ -60,15 +61,79 @@ export async function getVanHostId(host_id,id) {
     return data.van
 }
 
+export async function editVanByHost(data_update,host_id,id) {
+    const end_point = url + `vans/${id}/host/${host_id}`
+    const res = await fetch(end_point, {
+        method: "PUT",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(data_update)
+
+    })
+    if (!res.ok) {
+         const error_obj = {
+            message:`error editing rental information `,
+            status: res.status
+        }
+        throw error_obj
+    }
+
+    const data = await res.json()
+    console.log(data)
+    return data
+}
+
+export async function deleteVanByHost(host_id,id) {
+    const end_point = url + `vans/${id}/host/${host_id}`
+    const res = await fetch(end_point, {
+        method: "DELETE"
+    })
+
+    if (!res.ok) {
+        const error_obj = {
+            message:`error deleting a van rental listing `,
+            status: res.status
+        }
+        throw error_obj
+    }
+
+    const data = await res.json()
+    console.log(data)
+    return data
+}
+
+export async function createVanByHost(van_data, host_id) {
+    console.log(van_data, typeof van_data)
+    const end_point = url + `vans/van/host/${host_id}`
+    const res = await fetch(end_point, {
+        method : "POST",
+        headers: {
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(van_data)
+    })
+
+    if (!res.ok) {
+        const error_obj = {
+            message:`error creating a van rental listing `,
+            status: res.status
+        }
+        throw error_obj
+    }
+
+    const data = await res.json()
+    console.log(data)
+    return data
+}
+
+
 // handle user accounts
 export async function login(creds){
     const end_point = url + "users/login"
+    console.log(end_point, creds)
     const res = await fetch(end_point,{
-        method:"post",
-        body:JSON.stringify(creds),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
+        method:"POST",
+        headers: {"Content-type": "application/json"},
+        body:JSON.stringify(creds)
     })
 
     if(!res.ok) {

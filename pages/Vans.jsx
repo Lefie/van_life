@@ -15,7 +15,8 @@ export default function Vans() {
     const [error, setError] = useState(null)
    
     if (searchParams) {
-       console.log( searchParams.getAll("type"))
+        console.log("search params", searchParams)
+        console.log( searchParams.getAll("type"))
     }
     
     useEffect(()=>{
@@ -36,15 +37,14 @@ export default function Vans() {
 
     const filtered_vans = filterType ? vans.filter((v) => v.type === filterType) : vans
   
-
     const displayVan = filtered_vans.map(van => (
         <div className={"van"}>
             <NavLink 
-                to={`${van.id}`} 
+                to={`${van._id}`} 
                 state={{
                     search:searchParams.toString()
                     }}>
-                <img className="van_img" src={van.imageUrl} alt={`van ${van.id}`} />
+                <img className="van_img" src={van.imageUrl} alt={`van ${van._id}`} />
                 <div className="van-desc">
                     <p className="van-name">{van.name}</p>
                     <p className="van-price">${van.price} <span>/day</span></p>
@@ -61,7 +61,6 @@ export default function Vans() {
         }else{
             setSelected(label)
         }
-
     
         console.log(key, value)
         setSearchParams(prevParams => {
@@ -72,8 +71,6 @@ export default function Vans() {
             }
             return prevParams
         } )
-        
-        
     }
 
     if (loading) {
