@@ -22,9 +22,11 @@ export default function VanDetails(){
     const [bookFail, setBookFail] = useState(false)
     const [msg, setMsg] = useState(null)
     const [active, setIsActive] = useState(false)
-    const [user_id, setUserId] = useState(JSON.parse(localStorage.getItem("userInfo"))["_id"])
+    const [user_id, setUserId] = useState(localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo"))["_id"] : "")
     const [savedVans, setSavedVans] = useState()
     const navigate = useNavigate()
+
+    console.log("hello from van details line 29", localStorage.getItem("userInfo") ? "tes":"no", user_id)
 
     function generateName() {
         if(location.state){
@@ -58,10 +60,13 @@ export default function VanDetails(){
             try {
                 console.log("hello")
                 const van = await getVanById(id)
-                const vans_saved_by_user = await get_all_vans_saved_by_user(user_id)
-                const saved_vans_arr = vans_saved_by_user["saved_vans"]
-                setSavedVans(saved_vans_arr)
+                if (user_id !== ""){
+                    const vans_saved_by_user = await get_all_vans_saved_by_user(user_id)
+                    const saved_vans_arr = vans_saved_by_user["saved_vans"]
+                    setSavedVans(saved_vans_arr)
+                }
                 setVanDetails(van)
+
 
             }catch(error){
                 console.log("error")
@@ -222,15 +227,16 @@ export default function VanDetails(){
                 <div className="van-details">
                     <Link className="back" to={`..${generateBackLink()}`} relative="path"><p> Back to {generateName()}  vans</p></Link>
                     <img className="van-img-details" src={vanDetails.imageUrl} />
-                    {active ? <i className="fa-solid fa-heart heart-icon-style solid-heart" onClick={()=> {handleHeart(van_id)}}></i> :
-                    <i className="fa-regular fa-heart heart-icon-style" onClick={()=> {handleHeart(van_id)}}></i> }
-                   
+                    {user_id !== "" ? (active ? <i className="fa-solid fa-heart heart-icon-style solid-heart" onClick={()=> {handleHeart(van_id)}}></i> :
+                    <i className="fa-regular fa-heart heart-icon-style" onClick={()=> {handleHeart(van_id)}}></i>) : <></> }
+                    
                     <div className="van-details-content">
                         <FilterBtn  name={`${vanDetails.type}`} />
                         <h2>{vanDetails.name}</h2>
                         <p className="price">${vanDetails.price}<span>/Day</span></p>
                         <p>{vanDetails.description}</p>
-                        <button onClick={handlePopupVisibility} className="main-button"> Rent this Van</button>
+                        {user_id !== ""?(<button onClick={handlePopupVisibility} className="main-button"> Rent this Van</button>):(<></>)}
+                        
                     </div>
                     <section className={`rental-pop-up ${hidden}`}>
                         {vanDetails && (
@@ -272,6 +278,8 @@ export default function VanDetails(){
                 </>
             
             )}
+
+            
         </div>
         </>
     )

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, NavLink,useSearchParams } from "react-router-dom";
+import {NavLink,useSearchParams } from "react-router-dom";
 import FilterBtn from "../ui_components/FilterBtn";
 import { getVans } from "../apis";
 
