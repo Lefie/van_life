@@ -306,7 +306,7 @@ export async function get_all_vans_saved_by_user(user_id) {
     const data = await res.json()
     if (data && data["success"] === "true") {
         console.log(data)
-        return data
+        return data["saved_vans"]
     }
 
     if (!res.ok) {

@@ -11,6 +11,7 @@ export default function VansDetailsHost() {
     const [van, setVan] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
+    const [editingMode, setEditingMode] = useState(false)
 
     useEffect(()=>{
        async function getHostVansId(van_id) {
@@ -70,7 +71,7 @@ export default function VansDetailsHost() {
         <div className="van-host-container">
             <Link to=".." relative="path" className="back-link">back to all vans</Link>
             
-              {van && (
+              {van && !editingMode && (
                 <>  
                 <div className="van-host-details-container">
                     <div className="van-details-by-host">
@@ -88,6 +89,19 @@ export default function VansDetailsHost() {
                     </div>
                     <Outlet context={van} />
                 </div>
+                </>
+              )}
+
+              {van && editingMode && (
+                <>
+                    <form>
+                        <input 
+                            className="van_name"
+                            name="van_name"
+                            type="van_name"
+                            placeholder="van_name"
+                        />
+                    </form>
                 </>
               )}
            

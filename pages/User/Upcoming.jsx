@@ -11,15 +11,24 @@ export default function Upcoming() {
 
     useEffect(()=>{
             async function getAllVans() {
+                // get logged in user information and retrieve their id 
                 const userinfo = JSON.parse(localStorage.getItem("userInfo"))
                 const user_id = userinfo["_id"]
+
+                // retrieve the user's upcoming rentals by calling the correct api with their id
                 const upcoming_rentals = await get_upcoming_rentals({"user_id":user_id})
+                console.log("upcoming list",upcoming_rentals)
+
+                // get all the vans from db
                 const all_vans = await getVans()
+
                 let upcoming_list = []
                 for(let i = 0; i < upcoming_rentals.length; i++){
                     const van_id = upcoming_rentals[i]["van_id"]
-                    const van = all_vans.filter((van)=> van.id == van_id )
-                    console.log(van[0].imageUrl, van[0]["name"],(upcoming_rentals[i]["start_date"]),upcoming_rentals[i]["end_date"])
+                    const van = all_vans.filter((van)=> van._id == van_id )
+                    console.log("vannnn", van)
+                    
+                    console.log(van[0]["imageUrl"], van[0]["name"],(upcoming_rentals[i]["start_date"]),upcoming_rentals[i]["end_date"])
                     
                     const start_date = new Date(upcoming_rentals[i]["start_date"])
                     const end_date = new Date(upcoming_rentals[i]["end_date"])
@@ -31,19 +40,15 @@ export default function Upcoming() {
                         name:van[0]["name"],
                         rental_start_date:start_date_str,
                         rental_end_date:end_date_str,
-                        id:van[0]["id"]
+                        id:van[0]["_id"]
                     }
                     upcoming_list.push(data_obj)
                 }
-                
-                try {
-                    setVans(upcoming_list)
-    
-                }catch(err){
-                    setError(err)
-                }
+                console.log("upcoming list",upcoming_list)
+                setVans(upcoming_list)
             }
             getAllVans()
+            console.log("allllll vansssss",vans)
     
         },[])
         
@@ -58,7 +63,7 @@ export default function Upcoming() {
                     {vans && vans.length > 0 ? vans.map(van => (
                         <>
                             <article className="upcoming_vans_details">
-                                <NavLink className="non-deco" to={`../../vans/${van.id}`}>
+                                <NavLink className="non-deco" to={`../../vans/${van["id"]}`}>
                                     <img src={`${van.imageUrl}`} alt="van-detail" />
                                     <p className="upcoming_van_name">{van.name}</p>
                                     <p className="van_dates">{van.rental_start_date} ~ {van.rental_end_date}</p>

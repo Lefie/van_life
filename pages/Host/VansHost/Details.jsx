@@ -9,9 +9,9 @@ export default function Details() {
         <>
         <div className="van-host-details-content">
            <p className="details"> Name: <span>{van.name}</span>  </p>
-           <p className="details">  Category: <span>{van.type}</span></p>
-           <p className="details">  Description: <span>{van.description}</span></p>
-           <p className="details">  Visibility: <span>public</span></p>
+           <p className="details"> Category: <span>{van.type}</span></p>
+           <p className="details"> Description: <span>{van.description}</span></p>
+           <p className="details"> Visibility: <span>public</span></p>
         </div>
         </>
     )

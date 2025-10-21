@@ -4,7 +4,7 @@ import { useParams, NavLink } from "react-router-dom";
 import { getVans, get_all_vans_saved_by_user } from "../../apis";
 
 
-export default function Dashboard() {
+export default function UserDashboard() {
     const { username } = useParams()
     const [vans, setVans] = useState()
     const [savedVans, setSavedVans] = useState()
@@ -19,12 +19,21 @@ export default function Dashboard() {
             try {
                 const vans = await getVans()
                 const vans_saved = await get_all_vans_saved_by_user(user_id)
-                const saved = vans_saved["saved_vans"]
+                console.log("before for loop", vans, vans_saved)
+                
                 let saved_van_list = []
-                for (let i = 0 ; i < saved.length; i++) {
-                    const van = vans.filter(van => van["id"] === saved[i]["van_id"])[0]
-                    saved_van_list.push(van)
+                
+                for (let i = 0; i < vans.length; i ++) {
+                    const van_id = vans[i]["_id"]
+
+                    vans_saved.forEach(van => {
+                        if (van["van_id"] === van_id){
+                            saved_van_list.push(vans[i])
+                        }
+                    })
                 }
+
+                console.log("saved van list",saved_van_list)
                 setSavedVans(saved_van_list)
                 setVans(vans)
 
@@ -45,7 +54,7 @@ export default function Dashboard() {
                     {savedVans && savedVans.length > 0 ? savedVans.map(van => (
                         <>
                             <article className="saved_vans_details">
-                                <NavLink className="non-deco" to={`../vans/${van.id}`}>
+                                <NavLink className="non-deco" to={`../vans/${van["_id"]}`}>
                                     <img src={`${van.imageUrl}`} alt="van-detail" />
                                     <p className="saved_van_name">{van.name}</p>
                                 </NavLink>

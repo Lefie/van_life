@@ -8,7 +8,7 @@ export default function Photos() {
         <>
          <div className="van-host-details-content">
             <img src={`${van.imageUrl}`} />        
-            </div>
+        </div>
         </>
     )
 }

@@ -58,16 +58,12 @@ export default function VanDetails(){
         async function getVan(id){
             setLoading(true)
             try {
-                console.log("hello")
                 const van = await getVanById(id)
                 if (user_id !== ""){
                     const vans_saved_by_user = await get_all_vans_saved_by_user(user_id)
-                    const saved_vans_arr = vans_saved_by_user["saved_vans"]
-                    setSavedVans(saved_vans_arr)
+                    setSavedVans(vans_saved_by_user)
                 }
                 setVanDetails(van)
-
-
             }catch(error){
                 console.log("error")
                 setError(error)
@@ -79,9 +75,10 @@ export default function VanDetails(){
         getVan(van_id)
     },[param.id])
 
+    // heart filled or no fill
     useEffect(()=>{
         if (savedVans) {
-            console.log(savedVans)
+            console.log("saved vans from line 84",savedVans)
             savedVans.map(saved_van => {
                 if (saved_van["van_id"] === van_id) {
                     setIsActive(true)

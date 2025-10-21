@@ -24,9 +24,11 @@ import { useContext } from 'react'
 import ReviewChart from './ui_components/ReviewChart'
 import IncomeChart from './ui_components/IncomeChart'
 import UserLayout from './pages/User/UserLayout'
-import UserDashboard from './pages/User/Dashboard'
+import UserDashboard from './pages/User/UserDashboard'
 import RentalHisotry from './pages/User/RentalHistory'
 import Upcoming from './pages/User/Upcoming'
+import VanDetailsEdit from './pages/Host/VanDetailsEdit'
+import VanRegister from './pages/Host/VanRegister'
 
 
 
@@ -51,7 +53,8 @@ function App() {
                   <Route index element={<Dashboard/>} />
                   <Route path="income" element={<Income />}/>
                   <Route path="vans" element={<VansHost />} />
-
+                  <Route path="vans/:id/setting" element={<VanDetailsEdit />} />
+                  <Route path="vans/van/new" element={<VanRegister />}/>
                   <Route path="vans/:id" element={<VansDetailsHost />}>
                     <Route index element={<Details />} />
                     <Route path="pricing" element={<Pricing />} />
