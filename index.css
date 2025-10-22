@@ -367,7 +367,6 @@ body {
   border-radius:5px;
   align-items: center;
   color: #4D4D4D;
-  border:1px solid red;
   position:relative;
 }
 
@@ -503,14 +502,14 @@ body {
   margin-top:1em;
 }
 
-.van-registration-form-container{
+.van-registration-form-container, .van-edit-form-container{
   min-height: 70vh;
   display: grid;
   place-content: center;
 
 }
 
-.van-registration-form {
+.van-registration-form, .van-edit-form {
   padding:1em;
   height: 30em;
   display: flex;
@@ -518,6 +517,7 @@ body {
   row-gap: 20px;
   background-color: white;
   margin-bottom: 2em;
+  border-radius: 15px;
 }
 
 .van-registration-form .select-type {

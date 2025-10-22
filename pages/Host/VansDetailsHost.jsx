@@ -7,11 +7,9 @@ import { getVanHostId } from "../../apis";
 
 export default function VansDetailsHost() {
     const {id} = useParams()
-    console.log("van id",id)
     const [van, setVan] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
-    const [editingMode, setEditingMode] = useState(false)
 
     useEffect(()=>{
        async function getHostVansId(van_id) {
@@ -70,8 +68,7 @@ export default function VansDetailsHost() {
         <>
         <div className="van-host-container">
             <Link to=".." relative="path" className="back-link">back to all vans</Link>
-            
-              {van && !editingMode && (
+              {van && (
                 <>  
                 <div className="van-host-details-container">
                     <div className="van-details-by-host">
@@ -81,7 +78,7 @@ export default function VansDetailsHost() {
                             <p className="van-name">{van.name}</p>
                             <p>${van.price} / day</p>
                         </div>
-                    </div>
+                </div>
                     <div className="van-host-details-links">
                         <NavLink style={({isActive})=> isActive ? styles : null} to="." end>Details</NavLink>
                         <NavLink style={({isActive})=> isActive ? styles : null} to={`pricing`}>Pricing</NavLink>
@@ -92,19 +89,6 @@ export default function VansDetailsHost() {
                 </>
               )}
 
-              {van && editingMode && (
-                <>
-                    <form>
-                        <input 
-                            className="van_name"
-                            name="van_name"
-                            type="van_name"
-                            placeholder="van_name"
-                        />
-                    </form>
-                </>
-              )}
-           
         </div>
        
         </>

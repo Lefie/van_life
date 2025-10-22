@@ -13,9 +13,10 @@ export default function VanRegister(){
         hostId:JSON.parse(localStorage.getItem("userInfo"))["_id"] || ""
 
     })
-
-    const navigate = useNavigate()
+    
     const [error, setError] = useState()
+    const [formValid, setFormValid] = useState()
+    const navigate = useNavigate()
 
     function handleChange(e){
        const name = e.target.name
@@ -28,7 +29,8 @@ export default function VanRegister(){
 
 
     function handleSubmission(e){
-        console.log("submit", formData, `${formData.hostId}`)
+        console.log("submit", formData, formData.hostId)
+       
         createVanByHost(formData,formData.hostId)
         .then(data => {
             console.log(data)
@@ -51,6 +53,7 @@ export default function VanRegister(){
                     name="name"
                     value={`${formData.name}`}
                     onChange={handleChange}
+                    required
                     />
                 </label>
                 <label>Enter the description of the van:
@@ -59,6 +62,7 @@ export default function VanRegister(){
                     name="description"
                     value={`${formData.description}`}
                     onChange={handleChange}
+                    required
                     />
                 </label>
                 <label>Enter the price of the van:
@@ -67,6 +71,7 @@ export default function VanRegister(){
                     name="price"
                     value={`${formData.price}`}
                     onChange={handleChange}
+                    required
                     />
                 </label>
                 <label>Enter the image url of the van:
@@ -75,10 +80,11 @@ export default function VanRegister(){
                     name="imageUrl"
                     value={`${formData.imageUrl}`}
                     onChange={handleChange}
+                    required
                     />
                 </label>
                 <label>Select a type for your van:
-                    <select className="select-type" name="type" value={`${formData.type}`} onChange={handleChange}>
+                    <select required className="select-type" name="type" value={`${formData.type}`} onChange={handleChange}>
                         <option value="">--Please choose an option--</option>
                         <option value="simple">Simple</option>
                         <option value="luxury">Luxury</option>

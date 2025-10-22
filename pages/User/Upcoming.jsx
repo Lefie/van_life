@@ -48,8 +48,6 @@ export default function Upcoming() {
                 setVans(upcoming_list)
             }
             getAllVans()
-            console.log("allllll vansssss",vans)
-    
         },[])
         
 

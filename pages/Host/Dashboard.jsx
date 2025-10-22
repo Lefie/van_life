@@ -1,7 +1,7 @@
 import React from "react";
 import { getVansHost } from "../../apis";
 import { useEffect, useState } from "react";
-
+import { NavLink } from "react-router-dom";
 
 export default function Dashboard() {
     const [vans, setVans] = useState()
@@ -36,19 +36,21 @@ export default function Dashboard() {
            <div className="dashboard-list-vans">
                 <div className="content">
                     <h3>Your listed vans</h3>
-                    <p>View all</p>
+                    <NavLink className={"non-deco"} to={`/host/vans`} ><p>View all</p></NavLink>
                 </div>
                 
                 <div className="vans-list">
                     {vans && vans.map((van) => (<>
+                    <NavLink className={"non-deco"} to={`vans/${van["_id"]}`}>
                         <div className="van-details-content-box">
                             <img src={van.imageUrl} width={"50px"} />
                             <div className="details">
                                 <p className="name">{van.name}</p>
                                 <p className="price">${van.price}/day</p>
                             </div>
-                            <button className="btn-edit">edit</button>
                         </div>
+                    </NavLink>
+                        
                     </>))}
                 </div>
            </div>
