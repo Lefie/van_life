@@ -23,10 +23,11 @@ export default function VanDetails(){
     const [msg, setMsg] = useState(null)
     const [active, setIsActive] = useState(false)
     const [user_id, setUserId] = useState(localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo"))["_id"] : "")
+    const [userIsHost, setUserIsHost] = useState(localStorage.getItem("userInfo")? JSON.parse(localStorage.getItem("userInfo"))["isHost"] : "")
     const [savedVans, setSavedVans] = useState()
     const navigate = useNavigate()
 
-    console.log("hello from van details line 29", localStorage.getItem("userInfo") ? "tes":"no", user_id)
+    console.log("hello from van details line 29", localStorage.getItem("userInfo") ? "tes":"no", user_id, userIsHost)
 
     function generateName() {
         if(location.state){
@@ -224,7 +225,9 @@ export default function VanDetails(){
                 <div className="van-details">
                     <Link className="back" to={`..${generateBackLink()}`} relative="path"><p> Back to {generateName()}  vans</p></Link>
                     <img className="van-img-details" src={vanDetails.imageUrl} />
-                    {user_id !== "" ? (active ? <i className="fa-solid fa-heart heart-icon-style solid-heart" onClick={()=> {handleHeart(van_id)}}></i> :
+                    
+                    {/* hide heart when user is a host and not a renter */}
+                    {user_id !== "" && userIsHost === false ? (active ? <i className="fa-solid fa-heart heart-icon-style solid-heart" onClick={()=> {handleHeart(van_id)}}></i> :
                     <i className="fa-regular fa-heart heart-icon-style" onClick={()=> {handleHeart(van_id)}}></i>) : <></> }
                     
                     <div className="van-details-content">
