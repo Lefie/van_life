@@ -48,7 +48,10 @@ export default function Login(){
             }
 
         })
-        .catch(err => {setError(err)})
+        .catch(err => {
+            console.log("here is the loggin error", err)
+            setError(err)
+        })
         .finally(()=>{
             setSubmitting(false) 
         })

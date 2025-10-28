@@ -7,12 +7,9 @@ export default function Dashboard() {
     const [vans, setVans] = useState()
     useEffect(()=>{
         async function getHostVans() {
-            const userInfo = JSON.parse(localStorage.getItem("userInfo"))
-            if(userInfo) {
-                const data = await getVansHost(userInfo["_id"])
-                console.log(data)
-                setVans(data)
-            }
+            const data = await getVansHost()
+            console.log(data)
+            setVans(data)
         }
         getHostVans()
     },[])

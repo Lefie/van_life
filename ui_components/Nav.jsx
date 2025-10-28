@@ -4,13 +4,14 @@ import profile from "../assets/profile.png"
 import { Link, NavLink } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { UserLoginContext } from "../context/UserLoginContext";
-import { useScrollTrigger } from "@mui/material";
+
 
 
 
 export default function Nav() {
-    const {loginStatus, logout,getCurrentUser} = useContext(UserLoginContext)
-    console.log(loginStatus)
+    const {isHost, loginStatus, logout,getCurrentUser} = useContext(UserLoginContext)
+    console.log(loginStatus, "from nav")
+  
     const current_user = getCurrentUser()
     console.log(current_user, "from nav")
     const [dash, setDash] = useState("")

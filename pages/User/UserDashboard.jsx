@@ -8,17 +8,14 @@ export default function UserDashboard() {
     const { username } = useParams()
     const [vans, setVans] = useState()
     const [savedVans, setSavedVans] = useState()
-    const [user_id, setUserId] = useState(JSON.parse(localStorage.getItem("userInfo"))["_id"])
     const [error, setError] = useState()
 
-    // TODO: verify the username to be a valid user 
-    // Check against the loocalstorage
 
     useEffect(()=>{
         async function getAllVans() {
             try {
                 const vans = await getVans()
-                const vans_saved = await get_all_vans_saved_by_user(user_id)
+                const vans_saved = await get_all_vans_saved_by_user()
                 console.log("before for loop", vans, vans_saved)
                 
                 let saved_van_list = []

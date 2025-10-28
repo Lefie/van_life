@@ -1,4 +1,4 @@
-const url = `http://127.0.0.1:5000/api/`
+const url = `http://127.0.0.1:5001/api/`
 //const url = `https://vanlifebackend-production-5f4c.up.railway.app/api/`
 
 
@@ -32,9 +32,16 @@ export async function getVanById(id) {
     return data.van
 }
 
-export async function getVansHost(host_id){
-    const end_point = url + `vans/host/${host_id}`
-    const res = await fetch(end_point)
+export async function getVansHost(){
+    const end_point = url + `vans/host`
+    const jwt_token = localStorage.getItem("jwt_token")
+
+    const res = await fetch(end_point, {
+        headers: {
+            Authorization:  `Bearer ${jwt_token}`
+        }
+    })
+
     if (!res.ok) {
         const error_obj = {
             message:`error getting vans by host `,
@@ -47,9 +54,14 @@ export async function getVansHost(host_id){
 }
 
 // allows host to retrieve a rental owned by host 
-export async function getVanHostId(host_id,id) {
-    const end_point = url + `vans/${id}/host/${host_id}`
-    const res = await fetch(end_point)
+export async function getVanHostId(id) {
+    const jwt_token = localStorage.getItem("jwt_token")
+    const end_point = url + `vans/${id}/host`
+    const res = await fetch(end_point, {
+        headers: {
+            Authorization:  `Bearer ${jwt_token}`
+        }
+    })
     if (!res.ok) {
         const error_obj = {
             message:`error getting van by id by host `,
@@ -61,11 +73,15 @@ export async function getVanHostId(host_id,id) {
     return data.van
 }
 
-export async function editVanByHost(data_update,host_id,id) {
-    const end_point = url + `vans/${id}/host/${host_id}`
+export async function editVanByHost(data_update,id) {
+    const jwt_token = localStorage.getItem("jwt_token")
+    const end_point = url + `vans/${id}/host`
     const res = await fetch(end_point, {
         method: "PUT",
-        headers:{"Content-Type":"application/json"},
+        headers:{
+            "Content-Type":"application/json",
+            Authorization:  `Bearer ${jwt_token}`
+        },
         body: JSON.stringify(data_update)
 
     })
@@ -82,10 +98,14 @@ export async function editVanByHost(data_update,host_id,id) {
     return data
 }
 
-export async function deleteVanByHost(host_id,id) {
-    const end_point = url + `vans/${id}/host/${host_id}`
+export async function deleteVanByHost(id) {
+    const jwt_token = localStorage.getItem("jwt_token")
+    const end_point = url + `vans/${id}/host`
     const res = await fetch(end_point, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+            Authorization:  `Bearer ${jwt_token}`
+        }
     })
 
     if (!res.ok) {
@@ -101,13 +121,15 @@ export async function deleteVanByHost(host_id,id) {
     return data
 }
 
-export async function createVanByHost(van_data, host_id) {
+export async function createVanByHost(van_data) {
     console.log(van_data, typeof van_data)
-    const end_point = url + `vans/van/host/${host_id}`
+    const jwt_token = localStorage.getItem("jwt_token")
+    const end_point = url + `vans/van/host`
     const res = await fetch(end_point, {
         method : "POST",
         headers: {
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            Authorization:  `Bearer ${jwt_token}`
         },
         body: JSON.stringify(van_data)
     })
@@ -141,6 +163,7 @@ export async function login(creds){
             message:`error logging in `,
             status: res.status
         }
+        console.log("Error from logging in")
         throw error_obj
     }
 
@@ -175,10 +198,14 @@ export async function registration(creds) {
 
 // handle booking rentals 
 export async function book_rental(rental_obj) {
-    const end_point = url + `rentals/create_new_rental`
+    const jwt_token = localStorage.getItem("jwt_token")
+    const end_point = url + `rentals`
     const res = await fetch(end_point, {
         method: 'POST',
-        headers:{"Content-Type":"application/json"},
+        headers:{
+            "Content-Type":"application/json",
+            Authorization:  `Bearer ${jwt_token}`
+        },
         body: JSON.stringify(rental_obj)
     })
     const data = await res.json()
@@ -200,13 +227,16 @@ export async function book_rental(rental_obj) {
 }
 
 // retrieve upcoming rental 
-export async function get_upcoming_rentals(user_data) {
+export async function get_upcoming_rentals() {
+    const jwt_token = localStorage.getItem("jwt_token")
     const end_point = url + `rentals/upcoming_rentals`
-    console.log(user_data)
+
     const res = await fetch(end_point, {
-        method: 'POST',
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify(user_data)
+        method: 'GET',
+        headers:{
+            "Content-Type":"application/json",
+            Authorization:  `Bearer ${jwt_token}`
+        }
     })
     const data = await res.json()
     if (data && data["success"] === "true"){
@@ -226,12 +256,15 @@ export async function get_upcoming_rentals(user_data) {
 }
 
 // retrieval rental history by user id
-export async function get_rental_history(user_data){
+export async function get_rental_history(){
+    const jwt_token = localStorage.getItem("jwt_token")
     const end_point = url + `rentals/rental_history`
     const res = await fetch(end_point, {
-        method: "POST",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify(user_data)
+        method: "GET",
+        headers:{
+            "Content-Type":"application/json",
+            Authorization:  `Bearer ${jwt_token}`
+        }
     })
 
     const data = await res.json()
@@ -253,13 +286,16 @@ export async function get_rental_history(user_data){
 }
 
 // add a saved rental 
-export async function add_to_saved_vans(van_id, user_id) {
+export async function add_to_saved_vans(van_id) {
+    const jwt_token = localStorage.getItem("jwt_token")
     const end_point = url  + `save/${van_id}`
     
     const res = await fetch(end_point, {
         method: "POST",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify(user_id)
+        headers:{
+            "Content-Type":"application/json",
+            Authorization:  `Bearer ${jwt_token}`
+        }
     })
 
     const data = await res.json()
@@ -279,11 +315,15 @@ export async function add_to_saved_vans(van_id, user_id) {
     }
 }
 
-export async function remove_from_saved_vans(van_id, user_id) {
-    const end_point = url + `unsave/${user_id}/${van_id}`
+export async function remove_from_saved_vans(van_id) {
+    const jwt_token = localStorage.getItem("jwt_token")
+    const end_point = url + `unsave/${van_id}`
     
     const res = await fetch(end_point, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            Authorization:  `Bearer ${jwt_token}`
+        }
     })
 
     const data = await res.json()
@@ -300,10 +340,17 @@ export async function remove_from_saved_vans(van_id, user_id) {
 
 }
 
-export async function get_all_vans_saved_by_user(user_id) {
-    const end_point = url+`saved_vans/${user_id}`
-    const res = await fetch(end_point)
+export async function get_all_vans_saved_by_user() {
+    const end_point = url+`saved_vans`
+    const jwt_token = localStorage.getItem("jwt_token")
+    console.log("from api get_all_vans_saved_by_user, jwt token ", jwt_token)
+    const res = await fetch(end_point, {
+        headers: {
+            Authorization:  `Bearer ${jwt_token}`
+        }
+    })
     const data = await res.json()
+    console.log(data)
     if (data && data["success"] === "true") {
         console.log(data)
         return data["saved_vans"]
@@ -311,6 +358,7 @@ export async function get_all_vans_saved_by_user(user_id) {
 
     if (!res.ok) {
         const error_msg = data["error"]
+        console.log("error_msg from line 320", error_msg)
 
         const error_obj = {
             message: error_msg,

@@ -15,8 +15,7 @@ export default function VansHost() {
        async function getHostVans(){
             setLoading(true)
             try {
-                const userInfo = JSON.parse(localStorage.getItem("userInfo"))
-                const data = await getVansHost(userInfo["_id"])
+                const data = await getVansHost()
                 setVans(data)
             }catch(err) {
                 setError(err)
@@ -49,8 +48,8 @@ export default function VansHost() {
         )
     }
 
-    function handleDelete(host_id, van_id){        
-        deleteVanByHost(host_id, van_id)
+    function handleDelete(van_id){        
+        deleteVanByHost(van_id)
         .then(data=>{
             console.log("this is the data of the van deleted", data)
             setVans(() => vans.filter(van => van._id !== van_id ))
@@ -90,10 +89,8 @@ export default function VansHost() {
                             }}>  Edit </button>
 
                             <button onClick={(e)=>{ 
-                                e.preventDefault();
-                                const user_info = JSON.parse(localStorage.getItem("userInfo"))
-                                const host_id = user_info["_id"]
-                                handleDelete(host_id, van._id)
+                                e.preventDefault();                                
+                                handleDelete(van._id)
                             }} className="host-delete-van-btn">  Delete </button>
                         </div>
                     </NavLink>

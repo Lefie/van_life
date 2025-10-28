@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +7,8 @@ import { getVanById, book_rental, add_to_saved_vans, remove_from_saved_vans, get
 import StatusBtn from "../ui_components/StatusBtn";
 import Message from "../ui_components/Message";
 import { useNavigate } from "react-router-dom";
+import { UserLoginContext } from "../context/UserLoginContext";
+
 
 export default function VanDetails(){
     const param = useParams()
@@ -22,12 +24,12 @@ export default function VanDetails(){
     const [bookFail, setBookFail] = useState(false)
     const [msg, setMsg] = useState(null)
     const [active, setIsActive] = useState(false)
-    const [user_id, setUserId] = useState(localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo"))["_id"] : "")
-    const [userIsHost, setUserIsHost] = useState(localStorage.getItem("userInfo")? JSON.parse(localStorage.getItem("userInfo"))["isHost"] : "")
     const [savedVans, setSavedVans] = useState()
     const navigate = useNavigate()
+    const {loginStatus} = useContext(UserLoginContext) 
+    const {isHost, username} = useContext(UserLoginContext)
+    console.log("user context", loginStatus, isHost, username)
 
-    console.log("hello from van details line 29", localStorage.getItem("userInfo") ? "tes":"no", user_id, userIsHost)
 
     function generateName() {
         if(location.state){
@@ -60,9 +62,15 @@ export default function VanDetails(){
             setLoading(true)
             try {
                 const van = await getVanById(id)
-                if (user_id !== ""){
-                    const vans_saved_by_user = await get_all_vans_saved_by_user(user_id)
-                    setSavedVans(vans_saved_by_user)
+                if (loginStatus){
+                    const vans_saved_by_user = await get_all_vans_saved_by_user()
+                    console.log("save vans :****",vans_saved_by_user)
+                    if (vans_saved_by_user.status === 401){
+                        setSavedVans([])
+                    }else{
+                        setSavedVans(vans_saved_by_user)
+                    }
+                    
                 }
                 setVanDetails(van)
             }catch(error){
@@ -118,17 +126,14 @@ export default function VanDetails(){
 
     // if this van is in saved_van db then it should be active - useEffect
 
-
     function handleHeart(van_id) {
         if (active === true){
             console.log("active false")
-            remove_from_saved_vans(van_id, user_id)
+            remove_from_saved_vans(van_id)
             setIsActive(false)
         }else{
             console.log("active true")
-            console.log("Add current van to saved db")
-            console.log(van_id, user_id)
-            add_to_saved_vans(van_id, {"user_id":user_id})
+            add_to_saved_vans(van_id)
             setIsActive(true)
         }
     }
@@ -179,7 +184,6 @@ export default function VanDetails(){
             console.log("valid dates")
             const data_obj = {
                 van_id:van_id,
-                user_id:user_id,
                 startDate:startDate,
                 endDate:endDate
             }
@@ -192,8 +196,6 @@ export default function VanDetails(){
                     setTimeout(()=>{
                         setBookSuccess(false)
                         console.log("navigate elsewhere")
-                        const userinfo = JSON.parse(localStorage.getItem("userInfo"))
-                        const username = userinfo["name"]
                         navigate(`/${username}/upcoming_rental`)
                     },3000)
                 }else{
@@ -225,9 +227,9 @@ export default function VanDetails(){
                 <div className="van-details">
                     <Link className="back" to={`..${generateBackLink()}`} relative="path"><p> Back to {generateName()}  vans</p></Link>
                     <img className="van-img-details" src={vanDetails.imageUrl} />
-                    
-                    {/* hide heart when user is a host and not a renter */}
-                    {user_id !== "" && userIsHost === false ? (active ? <i className="fa-solid fa-heart heart-icon-style solid-heart" onClick={()=> {handleHeart(van_id)}}></i> :
+
+                    {/* only show hearts when user is logged in and a renter */}
+                    {loginStatus === true && isHost === false ? (active ? <i className="fa-solid fa-heart heart-icon-style solid-heart" onClick={()=> {handleHeart(van_id)}}></i> :
                     <i className="fa-regular fa-heart heart-icon-style" onClick={()=> {handleHeart(van_id)}}></i>) : <></> }
                     
                     <div className="van-details-content">
@@ -235,9 +237,9 @@ export default function VanDetails(){
                         <h2>{vanDetails.name}</h2>
                         <p className="price">${vanDetails.price}<span>/Day</span></p>
                         <p>{vanDetails.description}</p>
-                        {user_id !== ""?(<button onClick={handlePopupVisibility} className="main-button"> Rent this Van</button>):(<></>)}
-                        
+                        {loginStatus === true && isHost === false ? (<button onClick={handlePopupVisibility} className="main-button"> Rent this Van</button>):(<></>)}
                     </div>
+
                     <section className={`rental-pop-up ${hidden}`}>
                         {vanDetails && (
                             <>
@@ -270,7 +272,6 @@ export default function VanDetails(){
                                 {bookSuccess && <StatusBtn name="success" /> }
                                 {bookFail && <StatusBtn name="fail" /> }
                                 </form>
-                            
                             </>
                         )}
                     </section>

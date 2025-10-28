@@ -14,15 +14,9 @@ export default function VansDetailsHost() {
     useEffect(()=>{
        async function getHostVansId(van_id) {
         setLoading(true)
-        try{
-            const userinfo = JSON.parse(localStorage.getItem("userInfo"))
-            console.log(userinfo,"from vansdetails host")
-            if (userinfo){
-                const data = await getVanHostId(userinfo["_id"],van_id)
-                setVan(data)
-            }
-            
-
+        try{   
+            const data = await getVanHostId(van_id)
+            setVan(data)
         }catch(err){
             console.log(err)
             setError(err)

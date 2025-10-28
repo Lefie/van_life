@@ -13,13 +13,12 @@ export default function VanDetailsEdit(){
     })
     const params = useParams()
     const van_id = params["id"]
-    const host_id = JSON.parse(localStorage.getItem("userInfo"))["_id"]
     const[error, setError]= useState()
     const [msg, setMsg] = useState("")
 
     function handleSubmission(){
        console.log("submit", formData)
-       editVanByHost(formData, host_id, van_id)
+       editVanByHost(formData, van_id)
        .then(data => {
             if (data["data"] === "success"){
                 setMsg("success")

@@ -10,12 +10,9 @@ export default function VanRegister(){
         price:0,
         imageUrl:"",
         type:"",
-        hostId:JSON.parse(localStorage.getItem("userInfo"))["_id"] || ""
-
     })
     
     const [error, setError] = useState()
-    const [formValid, setFormValid] = useState()
     const navigate = useNavigate()
 
     function handleChange(e){
@@ -29,9 +26,9 @@ export default function VanRegister(){
 
 
     function handleSubmission(e){
-        console.log("submit", formData, formData.hostId)
+        console.log("submit", formData)
        
-        createVanByHost(formData,formData.hostId)
+        createVanByHost(formData)
         .then(data => {
             console.log(data)
             if (data && data.van){

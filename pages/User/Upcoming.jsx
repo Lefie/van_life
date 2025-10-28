@@ -11,12 +11,10 @@ export default function Upcoming() {
 
     useEffect(()=>{
             async function getAllVans() {
-                // get logged in user information and retrieve their id 
-                const userinfo = JSON.parse(localStorage.getItem("userInfo"))
-                const user_id = userinfo["_id"]
+                
 
                 // retrieve the user's upcoming rentals by calling the correct api with their id
-                const upcoming_rentals = await get_upcoming_rentals({"user_id":user_id})
+                const upcoming_rentals = await get_upcoming_rentals()
                 console.log("upcoming list",upcoming_rentals)
 
                 // get all the vans from db
