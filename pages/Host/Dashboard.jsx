@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Dashboard() {
     const [vans, setVans] = useState()
+    const [name, setName] = useState(JSON.parse(localStorage.getItem("userInfo"))["name"])
     useEffect(()=>{
         async function getHostVans() {
             const data = await getVansHost()
@@ -18,7 +19,7 @@ export default function Dashboard() {
         <>
         <div className="van-details-container">
            <div className="dashboard-header">
-                <h1>Welcome, Lemon!</h1>
+                <h1>Welcome, {name}!</h1>
                 <div className="dashboard-income">
                     <p>Income last 30 days</p>
                     <p>Details</p>

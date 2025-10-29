@@ -49,7 +49,7 @@ function App() {
             <Route path="vans/:id" element={<VanDetails />} />
 
             <Route element={<AuthRequired />}>
-              <Route path="host" element={<HostLayout />}>
+              <Route path="host/:username" element={<HostLayout />}>
                   <Route index element={<Dashboard/>} />
                   <Route path="income" element={<Income />}/>
                   <Route path="vans" element={<VansHost />} />

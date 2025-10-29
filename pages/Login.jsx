@@ -44,7 +44,7 @@ export default function Login(){
             if (!isHost){
                 navigate(`../${name}`)
             }else {
-                navigate("/host")
+                navigate(`/host/${name}`)
             }
 
         })

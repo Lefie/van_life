@@ -25,12 +25,11 @@ export default function Nav() {
     useEffect(()=>{
         function getDash(){
             if(current_user) {
-                console.log("get DASH CALLED HERE")
+                const name = current_user["name"]
+                console.log("get DASH CALLED HERE", name, current_user["isHost"])
                 if (current_user["isHost"]){
-                    setDash("/host")
+                    setDash(`/host/${name}`)
                 }else {
-                    console.log(current_user["name"])
-                    const name = current_user["name"]
                     setDash(`/${name}`)
                 }
             }

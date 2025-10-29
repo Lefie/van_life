@@ -60,7 +60,14 @@ export default function Registration(){
                     handleLogin(data)
                     const name = formData["name"]
                     console.log(name)
-                    navigate(`../${name}`)
+                    const isHost = data.user["isHost"]
+                    if (isHost) {
+                        navigate(`../host/${name}`)
+                    }else{
+                        navigate(`../${name}`)
+                    }
+                    
+                   
                 })
                 .catch(err => {setError(err)})
             },3000)
