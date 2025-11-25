@@ -270,6 +270,32 @@ body {
   background-color: #FFF7ED;
 }
 
+.vans-host-list {
+  height: 75vh;
+  background-color: #FFF7ED;
+  padding:4em;
+  overflow-y: scroll;
+}
+
+.vans-host-profile {
+  height: 75vh;
+  background-color: #FFF7ED;
+  padding:3em;
+  overflow-y: scroll;
+}
+
+.vans-host-profile h1, .vans-host-profile h2 {
+  text-align: center;
+}
+
+.vans-host-profile h2 {
+  margin-top:1em;
+}
+
+.vans-host-profile .van{
+  margin:2em;
+}
+
 .van-img-details{
   width:12rem;
   border-radius: 1.5rem;

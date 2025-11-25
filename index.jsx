@@ -29,6 +29,8 @@ import RentalHisotry from './pages/User/RentalHistory'
 import Upcoming from './pages/User/Upcoming'
 import VanDetailsEdit from './pages/Host/VanDetailsEdit'
 import VanRegister from './pages/Host/VanRegister'
+import VansHostList from './pages/VansHostNameList'
+import HostProfile from './pages/HostProfile'
 
 
 
@@ -47,6 +49,8 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="vans" element={<Vans />} />
             <Route path="vans/:id" element={<VanDetails />} />
+            <Route path="vans/hosts" element={<VansHostList />}/>
+            <Route path="vans/hosts/:name" element={<HostProfile />} />
 
             <Route element={<AuthRequired />}>
               <Route path="host/:username" element={<HostLayout />}>

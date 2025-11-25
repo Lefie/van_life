@@ -33,6 +33,7 @@ export default function Main({cur}) {
                     <h2> Your destination is waiting.
                     Your van is ready.</h2>
                     <Link className="about-content-link" to="../vans"> Explore our vans </Link>
+                    <Link className="about-content-link" to="../vans/hosts"> Explore our hosts </Link>
                 </div>
             </div>
             </>

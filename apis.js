@@ -53,6 +53,23 @@ export async function getVansHost(){
     return data.vans
 }
 
+export async function getVansOwnedByEachHost(){
+    const end_point = url + "vans/all_hosts"
+    const res = await fetch(end_point)
+    
+    if (!res.ok) {
+        const error_obj = {
+            message:`error getting van by each host`,
+            status: res.status
+        }
+        throw error_obj
+    }
+
+    const data = await res.json()
+
+    return data.vanData
+}
+
 // allows host to retrieve a rental owned by host 
 export async function getVanHostId(id) {
     const jwt_token = localStorage.getItem("jwt_token")
@@ -194,6 +211,36 @@ export async function registration(creds) {
 
 
     return data
+}
+
+export async function get_user_info(user_id) {
+    const end_point = url + `users/${user_id}`
+    const response = await fetch(end_point)
+    const data = await response.json()
+
+    if (!response.ok) {
+        const error_obj = {
+            message: "error retrieving user information",
+            status: response.status
+        }
+        throw error_obj
+    }
+    return data["user"] 
+}
+
+export async function get_list_of_hosts_names(){
+    const endpoint = url + "vans/hostlist"
+    const response = await fetch(endpoint)
+    if (!response.ok) {
+        return {
+            message: "error retrieving host list information",
+            status: response.status
+        }
+    }
+
+    const data = await response.json()
+
+    return data["result"]
 }
 
 // handle booking rentals 

@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import FilterBtn from "../ui_components/FilterBtn";
-import { getVanById, book_rental, add_to_saved_vans, remove_from_saved_vans, get_all_vans_saved_by_user } from "../apis";
+import { getVanById, book_rental, add_to_saved_vans, remove_from_saved_vans, get_all_vans_saved_by_user, get_user_info } from "../apis";
 import StatusBtn from "../ui_components/StatusBtn";
 import Message from "../ui_components/Message";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,8 @@ export default function VanDetails(){
     const [bookFail, setBookFail] = useState(false)
     const [msg, setMsg] = useState(null)
     const [active, setIsActive] = useState(false)
+    const [vanHostId, setVanHostId] = useState("")
+    const [vanHostName, setVanHostName] = useState("")
     const [savedVans, setSavedVans] = useState()
     const navigate = useNavigate()
     const {loginStatus} = useContext(UserLoginContext) 
@@ -72,6 +74,7 @@ export default function VanDetails(){
                     }
                     
                 }
+                setVanHostId(van["hostId"])
                 setVanDetails(van)
             }catch(error){
                 console.log("error")
@@ -83,6 +86,25 @@ export default function VanDetails(){
 
         getVan(van_id)
     },[param.id])
+
+    if(vanDetails) {
+        console.log("van details",vanDetails)
+        console.log("van host id", vanHostId)
+    }
+
+    useEffect(()=>{
+        async function getUserInfo(){
+            if(vanHostId){
+                console.log("van host id")
+                const data = await get_user_info(vanHostId)
+                console.log("data: user info", data)
+                setVanHostName(data["name"])
+            }           
+        }
+
+        getUserInfo()
+
+    },[vanHostId])
 
     // heart filled or no fill
     useEffect(()=>{
@@ -96,10 +118,10 @@ export default function VanDetails(){
         }
     },[savedVans])
     
-    if(vanDetails) {
-        console.log("van details",vanDetails)
-    }
+    
 
+   
+ 
     if(loading) {
         return <>
          <div className="vans-details-container">
@@ -237,6 +259,10 @@ export default function VanDetails(){
                         <h2>{vanDetails.name}</h2>
                         <p className="price">${vanDetails.price}<span>/Day</span></p>
                         <p>{vanDetails.description}</p>
+                        <NavLink to={`../vans/hosts/${vanHostName.toLowerCase()}`} state={{name:`${vanHostName}`}}>
+                            <p>Owned By {vanHostName}</p>
+                        </NavLink>
+                        
                         {loginStatus === true && isHost === false ? (<button onClick={handlePopupVisibility} className="main-button"> Rent this Van</button>):(<></>)}
                     </div>
 
@@ -277,7 +303,6 @@ export default function VanDetails(){
                     </section>
                 </div>
                 </>
-            
             )}
 
             
